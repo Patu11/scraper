@@ -1,19 +1,16 @@
 <div>
   <h1>{{title}}</h1>
-  <!--  <div *ngFor="let chapter of chapters">-->
-  <!--    <app-chapter [chapter]="chapter"></app-chapter>-->
-  <!--  </div>-->
-  <mat-form-field appearance="fill">
+  <mat-form-field *ngIf="!loading" appearance="fill">
     <mat-label>Select chapter</mat-label>
     <mat-select>
       <mat-option *ngFor="let chapter of chapters" [value]="title">
         <div (click)="onChapterClick(chapter)">
           {{chapter.title}}
         </div>
-
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
   <div>
     <app-chapter [chapter]="selectedChapter"></app-chapter>
   </div>

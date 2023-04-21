@@ -1,0 +1,39 @@
+version: '3'
+services:
+  backend:
+    build: backend
+    ports:
+      - "8081:8081"
+    networks:
+      - backend
+
+  gateway:
+    build: gateway
+    ports:
+      - "8080:8080"
+    links:
+      - redis
+    depends_on:
+      - redis
+    networks:
+      - cache
+      - backend
+
+  ui:
+    build: ui
+    ports:
+      - "4200:80"
+    depends_on:
+      - gateway
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - cache
+
+networks:
+  cache:
+  backend:
+

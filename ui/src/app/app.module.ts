@@ -14,6 +14,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -23,17 +24,18 @@ import {MatSelectModule} from "@angular/material/select";
     ChapterComponent,
     PageComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatInputModule,
-    MatSelectModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatPaginatorModule,
+        MatInputModule,
+        MatSelectModule,
+        MatProgressBarModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

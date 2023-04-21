@@ -11,6 +11,7 @@ export class ComicComponent implements OnInit {
   title: string = '';
   chapters?: Chapter[];
   selectedChapter?: Chapter;
+  loading: boolean = true;
 
   constructor(private comicsService: ComicsService) {
   }
@@ -24,6 +25,7 @@ export class ComicComponent implements OnInit {
       (response) => {
         this.title = response.comic.title;
         this.chapters = response.comic.chapters;
+        this.loading = false;
       });
   }
 

@@ -1,0 +1,12 @@
+<div>
+  <!--  <a  mat-button routerLink=".">{{chapter ? chapter.title : ''}}</a>-->
+  <div *ngIf="chapter">
+    <h2>{{chapter.title}}</h2>
+    <p>Number of pages: {{chapter.pages ? chapter.pages.length : ''}}</p>
+  </div>
+  <div>
+    <div *ngFor="let page of chapter?.pages">
+      <app-page [page]="page"></app-page>
+    </div>
+  </div>
+</div>

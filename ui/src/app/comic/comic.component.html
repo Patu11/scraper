@@ -1,0 +1,20 @@
+<div>
+  <h1>{{title}}</h1>
+  <!--  <div *ngFor="let chapter of chapters">-->
+  <!--    <app-chapter [chapter]="chapter"></app-chapter>-->
+  <!--  </div>-->
+  <mat-form-field appearance="fill">
+    <mat-label>Select chapter</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let chapter of chapters" [value]="title">
+        <div (click)="onChapterClick(chapter)">
+          {{chapter.title}}
+        </div>
+
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div>
+    <app-chapter [chapter]="selectedChapter"></app-chapter>
+  </div>
+</div>

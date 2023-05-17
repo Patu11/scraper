@@ -14,6 +14,12 @@ public class RestTemplateConfiguration {
 
     @Bean
     public RestTemplate createRestTemplate(RestTemplateBuilder builder) {
-        return builder.rootUri(comicsBackendUrl).build();
+        return builder.rootUri(adjustUrl()).build();
+    }
+
+    private String adjustUrl() {
+        return System.getProperty("os.name").startsWith("Windows") ?
+                this.comicsBackendUrl.replace("#", "localhost") :
+                this.comicsBackendUrl.replace("#", "backend");
     }
 }

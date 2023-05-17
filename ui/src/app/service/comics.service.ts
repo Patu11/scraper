@@ -14,4 +14,8 @@ export class ComicsService {
   getComic(comicType: string) {
     return this.http.get<ComicResponse>(this.URL + comicType);
   }
+
+  getAllTitles() {
+    return this.http.get(this.URL + "titles");
+  }
 }

@@ -8,7 +8,9 @@ import java.io.IOException;
 
 public interface ComicsScrapeService {
 
-	Comic getComic();
+	Comic getComic(String comicUrl);
+
+	String getTitle(String comicUrl);
 
 	default Document connect(String url) {
 		try {

@@ -11,7 +11,10 @@ export class ComicComponent implements OnInit {
   title: string = '';
   chapters?: Chapter[];
   selectedChapter?: Chapter;
-  loading: boolean = true;
+  allTitles: string[] = [];
+  allUrls: string[] = [];
+  loading: boolean = false;
+  show: boolean = false;
 
   constructor(private comicsService: ComicsService) {
   }
@@ -20,13 +23,37 @@ export class ComicComponent implements OnInit {
     this.selectedChapter = chapter;
   }
 
-  ngOnInit(): void {
-    this.comicsService.getComic('TWD').subscribe(
+  handleTitleClick(title: string) {
+    this.loading = true;
+    this.show = false;
+    this.title = '';
+    this.chapters = [];
+    this.selectedChapter = undefined;
+    this.comicsService.getComic(title).subscribe(
       (response) => {
         this.title = response.comic.title;
         this.chapters = response.comic.chapters;
         this.loading = false;
+        this.show = true;
       });
+  }
+
+  mapResponse(response: string[]) {
+    this.allUrls = response.map(input => input.split(":")[0]);
+    this.allTitles = response.map(input => input.split(":")[1]);
+  }
+
+  ngOnInit(): void {
+    this.comicsService.getAllTitles().subscribe(
+      (response) => this.mapResponse(response as string[])
+    )
+
+    // this.comicsService.getComic('TWD').subscribe(
+    //   (response) => {
+    //     this.title = response.comic.title;
+    //     this.chapters = response.comic.chapters;
+    //     this.loading = false;
+    //   });
   }
 
 }

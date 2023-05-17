@@ -10,15 +10,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1")
 public class ComicsController {
 	private final ComicsService comicsService;
 
-	@GetMapping("/comic/{comicType}")
+	@GetMapping("/comic/{comicUrl}")
 	@Cacheable(value = "comics")
-	public ComicResponse comics(@PathVariable("comicType") ComicType comicType) {
-		return comicsService.handleRequest(comicType);
+	public ComicResponse comics(@PathVariable("comicUrl") String comicUrl) {
+		return comicsService.handleRequest(comicUrl);
+	}
+
+	@GetMapping("/comic/titles")
+	public List<String> allTitles() {
+		return comicsService.getAllTitles();
 	}
 }

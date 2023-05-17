@@ -5,22 +5,24 @@ import com.github.patu11.backend.model.comics.Comic;
 import com.github.patu11.backend.model.comics.Page;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class TheWalkingDeadScraper implements ComicsScrapeService {
-	public static final String TWD_URL = "https://comiconlinefree.net/comic/the-walking-dead";
+@Service
+public class ComicOnlineScraper implements ComicsScrapeService {
+	//	public static final String TWD_URL = "https://comiconlinefree.net/comic/the-walking-dead";
+	private static final String BASE_URL = "https://comiconlinefree.net/comic/";
 
 	@Override
-	public Comic getComic() {
-		Document doc = connect(TWD_URL);
-		String title = getTitle(doc);
-		List<Chapter> chapters = getChapters(doc);
+	public Comic getComic(String comicUrl) {
+		String title = getTitle(comicUrl);
+		List<Chapter> chapters = getChapters(comicUrl);
 		return new Comic(title, chapters);
 	}
 
-	private List<Chapter> getChapters(Document document) {
-		return getChaptersUrls(document).stream()
+	private List<Chapter> getChapters(String comicUrl) {
+		return getChaptersUrls(connect(BASE_URL + comicUrl)).stream()
 				.map(this::connect)
 				.map(this::mapChapter)
 				.toList();
@@ -51,7 +53,9 @@ public class TheWalkingDeadScraper implements ComicsScrapeService {
 				.toList();
 	}
 
-	private String getTitle(Document document) {
-		return document.getElementsByClass("manga-title").text();
+	@Override
+	public String getTitle(String comicUrl) {
+//		this.doc = connect(BASE_URL + comicUrl);
+		return connect(BASE_URL + comicUrl).getElementsByClass("manga-title").text();
 	}
 }

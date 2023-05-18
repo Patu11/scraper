@@ -1,7 +1,6 @@
-package com.github.patu11.gateway;
+package com.github.patu11.gateway.controller;
 
 import com.github.patu11.gateway.model.ComicResponse;
-import com.github.patu11.gateway.model.ComicType;
 import com.github.patu11.gateway.service.ComicsService;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,16 +15,16 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/api/v1")
 public class ComicsController {
-	private final ComicsService comicsService;
+    private final ComicsService comicsService;
 
-	@GetMapping("/comic/{comicUrl}")
-	@Cacheable(value = "comics")
-	public ComicResponse comics(@PathVariable("comicUrl") String comicUrl) {
-		return comicsService.handleRequest(comicUrl);
-	}
+    @GetMapping("/comic/{comicUrl}")
+    @Cacheable(value = "comics")
+    public ComicResponse comics(@PathVariable("comicUrl") String comicUrl) {
+        return comicsService.handleRequest(comicUrl);
+    }
 
-	@GetMapping("/comic/titles")
-	public List<String> allTitles() {
-		return comicsService.getAllTitles();
-	}
+    @GetMapping("/comic/titles")
+    public List<String> allTitles() {
+        return comicsService.getAllTitles();
+    }
 }

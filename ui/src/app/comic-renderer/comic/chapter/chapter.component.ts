@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Chapter} from "../model/ComicResponse";
+import {Chapter} from "../../../model/ComicResponse";
 
 @Component({
   selector: 'app-chapter',

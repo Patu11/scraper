@@ -1,0 +1,17 @@
+<div *ngIf="comic">
+  <h1>{{comic?.title}}</h1>
+  <mat-form-field>
+    <mat-label>Select chapter</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let chapter of comic?.chapters" [value]="comic?.title">
+        <div (click)="onChapterClick(chapter)">
+          {{chapter.title}}
+        </div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <app-chapter [chapter]="selectedChapter!"></app-chapter>
+  </div>
+</div>

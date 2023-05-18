@@ -11,51 +11,49 @@ import java.util.List;
 
 @Service
 public class ComicOnlineScraper implements ComicsScrapeService {
-	//	public static final String TWD_URL = "https://comiconlinefree.net/comic/the-walking-dead";
-	private static final String BASE_URL = "https://comiconlinefree.net/comic/";
+    private static final String BASE_URL = "https://comiconlinefree.net/comic/";
 
-	@Override
-	public Comic getComic(String comicUrl) {
-		String title = getTitle(comicUrl);
-		List<Chapter> chapters = getChapters(comicUrl);
-		return new Comic(title, chapters);
-	}
+    @Override
+    public Comic getComic(String comicUrl) {
+        String title = getTitle(comicUrl);
+        List<Chapter> chapters = getChapters(comicUrl);
+        return new Comic(title, chapters);
+    }
+    
+    @Override
+    public String getTitle(String comicUrl) {
+        return connect(BASE_URL + comicUrl).getElementsByClass("manga-title").text();
+    }
 
-	private List<Chapter> getChapters(String comicUrl) {
-		return getChaptersUrls(connect(BASE_URL + comicUrl)).stream()
-				.map(this::connect)
-				.map(this::mapChapter)
-				.toList();
-	}
+    private List<Chapter> getChapters(String comicUrl) {
+        return getChaptersUrls(connect(BASE_URL + comicUrl)).stream()
+                .map(this::connect)
+                .map(this::mapChapter)
+                .toList();
+    }
 
-	private Chapter mapChapter(Document document) {
-		String title = document.getElementsByClass("title").tagName("h1").stream()
-				.findFirst()
-				.map(Element::text)
-				.orElse("");
+    private Chapter mapChapter(Document document) {
+        String title = document.getElementsByClass("title").tagName("h1").stream()
+                .findFirst()
+                .map(Element::text)
+                .orElse("");
 
-		List<Page> pages = document.getElementsByClass("lazyload chapter_img").stream()
-				.map(element -> element.attr("data-original"))
-				.map(this::mapPage)
-				.toList();
+        List<Page> pages = document.getElementsByClass("lazyload chapter_img").stream()
+                .map(element -> element.attr("data-original"))
+                .map(this::mapPage)
+                .toList();
 
-		return new Chapter(title, pages);
-	}
+        return new Chapter(title, pages);
+    }
 
-	private Page mapPage(String url) {
-		return new Page(url);
-	}
+    private Page mapPage(String url) {
+        return new Page(url);
+    }
 
-	private List<String> getChaptersUrls(Document document) {
-		return document.getElementsByClass("ch-name").stream()
-				.map(element -> element.attr("href"))
-				.map(url -> url + "/full")
-				.toList();
-	}
-
-	@Override
-	public String getTitle(String comicUrl) {
-//		this.doc = connect(BASE_URL + comicUrl);
-		return connect(BASE_URL + comicUrl).getElementsByClass("manga-title").text();
-	}
+    private List<String> getChaptersUrls(Document document) {
+        return document.getElementsByClass("ch-name").stream()
+                .map(element -> element.attr("href"))
+                .map(url -> url + "/full")
+                .toList();
+    }
 }

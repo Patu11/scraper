@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
+
 @Configuration
 public class RestTemplateConfiguration {
 
@@ -18,8 +20,13 @@ public class RestTemplateConfiguration {
     }
 
     private String adjustUrl() {
-        return System.getProperty("os.name").startsWith("Windows") ?
-                this.comicsBackendUrl.replace("#", "localhost") :
-                this.comicsBackendUrl.replace("#", "backend");
+        return isDockerized() ?
+                this.comicsBackendUrl.replace("localhost", "backend") :
+                this.comicsBackendUrl;
+    }
+
+    private boolean isDockerized() {
+        File f = new File("/.dockerenv");
+        return f.exists();
     }
 }

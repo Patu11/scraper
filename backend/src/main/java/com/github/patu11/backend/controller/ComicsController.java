@@ -1,8 +1,6 @@
 package com.github.patu11.backend.controller;
 
-import com.github.patu11.backend.model.ComicResponse;
-
-import com.github.patu11.backend.model.ComicType;
+import com.github.patu11.backend.model.comics.ComicResponse;
 import com.github.patu11.backend.service.ComicsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,17 +14,16 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/api/v1")
 public class ComicsController {
+    private final ComicsService comicsService;
 
-	private final ComicsService comicsService;
+    @GetMapping("/comic/{comicUrl}")
+    public ComicResponse comics(@PathVariable("comicUrl") String comicUrl) {
+        System.out.println("Received request for comic: " + comicUrl);
+        return comicsService.handleRequest(comicUrl);
+    }
 
-	@GetMapping("/comic/{comicUrl}")
-	public ComicResponse comics(@PathVariable("comicUrl") String comicUrl) {
-		System.out.println("Received request: " + comicUrl);
-		return comicsService.handleRequest(comicUrl);
-	}
-
-	@GetMapping("/comic/titles")
-	public List<String> allTitles() {
-		return comicsService.getAllComicsTitles();
-	}
+    @GetMapping("/comic/titles")
+    public List<String> allTitles() {
+        return comicsService.getAllComicsTitles();
+    }
 }

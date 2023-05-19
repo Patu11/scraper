@@ -1,10 +1,11 @@
 package com.github.patu11.backend.scraper;
 
-import com.github.patu11.backend.model.series.Episode;
-import com.github.patu11.backend.model.series.Season;
-import com.github.patu11.backend.model.series.Series;
+
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
+import series.Episode;
+import series.Season;
+import series.Series;
 
 import java.time.LocalDate;
 import java.util.List;

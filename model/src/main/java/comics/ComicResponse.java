@@ -1,6 +1,4 @@
-package com.github.patu11.gateway.model;
-
-import com.github.patu11.gateway.model.comics.Comic;
+package comics;
 
 import java.io.Serializable;
 

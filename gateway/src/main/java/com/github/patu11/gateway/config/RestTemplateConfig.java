@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.File;
 
 @Configuration
-public class RestTemplateConfiguration {
+public class RestTemplateConfig {
 
     @Value("${comics.backend.url}")
     private String comicsBackendUrl;

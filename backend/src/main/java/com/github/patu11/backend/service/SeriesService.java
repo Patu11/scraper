@@ -1,9 +1,10 @@
 package com.github.patu11.backend.service;
 
-import com.github.patu11.backend.model.series.SeriesResponse;
+
 import com.github.patu11.backend.scraper.SeriesScrapeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import series.SeriesResponse;
 
 import java.util.List;
 

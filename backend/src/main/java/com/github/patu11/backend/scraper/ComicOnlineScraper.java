@@ -1,8 +1,8 @@
 package com.github.patu11.backend.scraper;
 
-import com.github.patu11.backend.model.comics.Chapter;
-import com.github.patu11.backend.model.comics.Comic;
-import com.github.patu11.backend.model.comics.Page;
+import comics.Chapter;
+import comics.Comic;
+import comics.Page;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class ComicOnlineScraper implements ComicsScrapeService {
         List<Chapter> chapters = getChapters(comicUrl);
         return new Comic(title, chapters);
     }
-    
+
     @Override
     public String getTitle(String comicUrl) {
         return connect(BASE_URL + comicUrl).getElementsByClass("manga-title").text();

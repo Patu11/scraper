@@ -1,7 +1,8 @@
 package com.github.patu11.gateway.controller;
 
-import com.github.patu11.gateway.model.ComicResponse;
+
 import com.github.patu11.gateway.service.ComicsService;
+import comics.ComicResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;

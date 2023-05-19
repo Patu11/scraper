@@ -1,7 +1,8 @@
 package com.github.patu11.backend.controller;
 
-import com.github.patu11.backend.model.comics.ComicResponse;
+
 import com.github.patu11.backend.service.ComicsService;
+import comics.ComicResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

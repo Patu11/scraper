@@ -1,12 +1,13 @@
 package com.github.patu11.backend.controller;
 
-import com.github.patu11.backend.model.series.SeriesResponse;
+
 import com.github.patu11.backend.service.SeriesService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import series.SeriesResponse;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class SeriesController {
 
     @GetMapping("/series/{seriesUrl}")
     public SeriesResponse series(@PathVariable String seriesUrl) {
+        System.out.println("Received request for series: " + seriesUrl);
         return seriesService.getSeries(seriesUrl);
     }
 

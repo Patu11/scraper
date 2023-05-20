@@ -7,7 +7,6 @@ import series.Episode;
 import series.Season;
 import series.Series;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -47,7 +46,7 @@ public class FilmwebScraper implements SeriesScrapeService {
 
     private Episode mapEpisode(Element element) {
         String title = element.getElementsByClass("posterEpisode").attr("title");
-        LocalDate premiereDate = LocalDate.parse(element.attr("data-air-date"));
+        String premiereDate = element.attr("data-air-date");
         return new Episode(title, premiereDate);
     }
 

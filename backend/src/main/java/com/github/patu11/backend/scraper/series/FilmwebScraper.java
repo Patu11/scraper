@@ -1,4 +1,4 @@
-package com.github.patu11.backend.scraper;
+package com.github.patu11.backend.scraper.series;
 
 
 import org.jsoup.nodes.Element;
@@ -13,6 +13,7 @@ import java.util.List;
 public class FilmwebScraper implements SeriesScrapeService {
     private static final String BASE_URL = "https://www.filmweb.pl";
     private static final String BASE_URL_SERIES = BASE_URL + "/serial/";
+    private static final String TITLE_UNKNOWN = "Title Unknown";
 
 
     @Override
@@ -25,7 +26,8 @@ public class FilmwebScraper implements SeriesScrapeService {
         return new Series(getTitle(seriesUrl), getSeasons(seriesUrl));
     }
 
-    private List<Season> getSeasons(String seriesUrl) {
+    @Override
+    public List<Season> getSeasons(String seriesUrl) {
         return connect(BASE_URL_SERIES + seriesUrl).getElementsByClass("squareNavigation__item").eachAttr("href")
                 .stream()
                 .map(this::mapSeason)
@@ -45,9 +47,14 @@ public class FilmwebScraper implements SeriesScrapeService {
     }
 
     private Episode mapEpisode(Element element) {
-        String title = element.getElementsByClass("posterEpisode").attr("title");
+        String title = extractTitle(element);
         String premiereDate = element.attr("data-air-date");
         return new Episode(title, premiereDate);
+    }
+
+    private String extractTitle(Element element) {
+        String title = element.getElementsByClass("posterEpisode").attr("title");
+        return title.isEmpty() ? TITLE_UNKNOWN : title;
     }
 
     private int extractSeasonNumber(String seasonUrl) {

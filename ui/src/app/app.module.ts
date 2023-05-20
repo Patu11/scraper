@@ -6,19 +6,23 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HomeComponent} from './home/home.component';
 import {MatButtonModule} from "@angular/material/button";
-import {ComicComponent} from './comic-renderer/comic/comic.component';
+import {ComicComponent} from './comic/comic-renderer/comic/comic.component';
 import {HttpClientModule} from '@angular/common/http';
-import {ChapterComponent} from './comic-renderer/comic/chapter/chapter.component';
-import {PageComponent} from './comic-renderer/comic/page/page.component';
+import {ChapterComponent} from './comic/comic-renderer/comic/chapter/chapter.component';
+import {PageComponent} from './comic/comic-renderer/comic/page/page.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import {ComicsListComponent} from './comics-list/comics-list.component';
+import {ComicsListComponent} from './comic/comics-list/comics-list.component';
 import {MatListModule} from "@angular/material/list";
-import {ComicsListEntryComponent} from './comics-list/comics-list-entry/comics-list-entry.component';
-import {ComicRendererComponent} from './comic-renderer/comic-renderer.component';
+import {ComicsListEntryComponent} from './comic/comics-list/comics-list-entry/comics-list-entry.component';
+import {ComicRendererComponent} from './comic/comic-renderer/comic-renderer.component';
+import {SeriesListComponent} from './series/series-list/series-list.component';
+import { SeriesListEntryComponent } from './series/series-list/series-list-entry/series-list-entry.component';
+import { SeriesRendererComponent } from './series/series-renderer/series-renderer.component';
+import { SeriesComponent } from './series/series-renderer/series/series.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import {ComicRendererComponent} from './comic-renderer/comic-renderer.component'
     PageComponent,
     ComicsListComponent,
     ComicsListEntryComponent,
-    ComicRendererComponent
+    ComicRendererComponent,
+    SeriesListComponent,
+    SeriesListEntryComponent,
+    SeriesRendererComponent,
+    SeriesComponent
   ],
   imports: [
     BrowserModule,

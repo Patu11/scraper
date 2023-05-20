@@ -3,6 +3,7 @@ package com.github.patu11.gateway.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import series.Episode;
 import series.SeriesResponse;
 
 import java.util.Arrays;
@@ -20,5 +21,9 @@ public class SeriesService {
 
     public List<String> getAllTitles() {
         return Arrays.stream(Objects.requireNonNull(restTemplate.getForEntity("/series/titles", String[].class).getBody())).toList();
+    }
+
+    public Episode getNextEpisode(String seriesUrl) {
+        return restTemplate.getForObject(String.format("/series/%s/episodes/next", seriesUrl), Episode.class);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import series.Episode;
 import series.SeriesResponse;
 
 import java.util.List;
@@ -26,5 +27,10 @@ public class SeriesController {
     @GetMapping("/series/titles")
     public List<String> allTitles() {
         return seriesService.getAllSeriesTitles();
+    }
+
+    @GetMapping("/series/{seriesUrl}/episodes/next")
+    public Episode nextEpisode(@PathVariable String seriesUrl) {
+        return seriesService.getNextEpisode(seriesUrl);
     }
 }

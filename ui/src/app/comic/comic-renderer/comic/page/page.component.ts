@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Page} from "../../../model/ComicResponse";
+import {Page} from "../../../../model/ComicResponse";
 
 @Component({
   selector: 'app-page',

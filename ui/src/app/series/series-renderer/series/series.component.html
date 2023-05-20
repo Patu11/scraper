@@ -1,0 +1,10 @@
+<div *ngIf="series">
+  <h1><strong>{{series.title}}</strong></h1>
+  <div>
+    <h2>Seasons: {{series.seasons?.length}}</h2>
+    <div>
+      <p>Next Episode: <strong>{{nextEpisode?.title}}</strong></p>
+      <p>Premiere Date: <strong>{{nextEpisode?.premiere}}</strong></p>
+    </div>
+  </div>
+</div>

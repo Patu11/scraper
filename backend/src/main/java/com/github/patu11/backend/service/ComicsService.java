@@ -1,7 +1,7 @@
 package com.github.patu11.backend.service;
 
 
-import com.github.patu11.backend.scraper.ComicsScrapeService;
+import com.github.patu11.backend.scraper.comic.ComicsScrapeService;
 import comics.Comic;
 import comics.ComicResponse;
 import lombok.AllArgsConstructor;

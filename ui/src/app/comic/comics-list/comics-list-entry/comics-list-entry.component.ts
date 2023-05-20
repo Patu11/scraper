@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CommonService} from "../../service/common.service";
+import {CommonService} from "../../../service/common.service";
 
 @Component({
   selector: 'app-comics-list-entry',
@@ -18,7 +18,7 @@ export class ComicsListEntryComponent implements OnInit {
   }
 
   onTitleClick() {
-    this.commonService.onTitleClicked(this.rawTitle);
+    this.commonService.onComicTitleClicked(this.rawTitle);
   }
 
   ngOnInit(): void {

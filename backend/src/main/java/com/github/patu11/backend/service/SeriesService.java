@@ -1,12 +1,16 @@
 package com.github.patu11.backend.service;
 
 
-import com.github.patu11.backend.scraper.SeriesScrapeService;
+import com.github.patu11.backend.scraper.series.SeriesScrapeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import series.Episode;
+import series.Season;
 import series.SeriesResponse;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +23,26 @@ public class SeriesService {
     }
 
     public List<String> getAllSeriesTitles() {
-        return seriesUrls;
+        return seriesUrls.stream()
+                .map(entry -> entry + ":" + seriesScrapeService.getTitle(entry))
+                .toList();
+    }
+
+    public Episode getNextEpisode(String seriesUrl) {
+        return seriesScrapeService.getSeasons(seriesUrl).stream()
+                .map(Season::episodes)
+                .flatMap(List::stream)
+                .filter(this::isPremiereAfterToday)
+                .findFirst()
+                .orElseThrow(NoSuchElementException::new);
+    }
+
+    private boolean isPremiereAfterToday(Episode episode) {
+        String premiere = episode.premiere();
+        if (premiere.split("-").length == 1) {
+            return Integer.parseInt(premiere.split("-")[0]) >= LocalDate.now().getYear();
+        }
+        LocalDate premiereDate = LocalDate.parse(premiere);
+        return premiereDate.isAfter(LocalDate.now());
     }
 }

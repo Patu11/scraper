@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CommonService} from "../service/common.service";
-import {ComicsService} from "../service/comics.service";
-import {Comic, ComicResponse} from "../model/ComicResponse";
+import {CommonService} from "../../service/common.service";
+import {ComicsService} from "../../service/comics.service";
+import {Comic, ComicResponse} from "../../model/ComicResponse";
 
 @Component({
   selector: 'app-comic-renderer',
@@ -25,7 +25,7 @@ export class ComicRendererComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.commonService.clickedTitle.subscribe((data) => this.getComicResponse(data))
+    this.commonService.clickedComicTitle.subscribe((data) => this.getComicResponse(data))
   }
 
 }

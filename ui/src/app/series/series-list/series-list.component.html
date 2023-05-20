@@ -1,0 +1,10 @@
+<div>
+  <mat-list>
+    <div *ngFor="let entry of titlesMap | keyvalue">
+      <mat-list-item>
+        <app-series-list-entry [title]="entry.value" [rawTitle]="entry.key"></app-series-list-entry>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-list>
+</div>

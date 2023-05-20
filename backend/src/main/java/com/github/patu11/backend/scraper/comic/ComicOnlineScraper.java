@@ -1,4 +1,4 @@
-package com.github.patu11.backend.scraper;
+package com.github.patu11.backend.scraper.comic;
 
 import comics.Chapter;
 import comics.Comic;

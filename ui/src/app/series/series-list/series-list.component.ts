@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {ComicsService} from "../service/comics.service";
+import {SeriesService} from "../../service/series.service";
 
 @Component({
-  selector: 'app-comics-list',
-  templateUrl: './comics-list.component.html',
-  styleUrls: ['./comics-list.component.css']
+  selector: 'app-series-list',
+  templateUrl: './series-list.component.html',
+  styleUrls: ['./series-list.component.css']
 })
-export class ComicsListComponent implements OnInit {
+export class SeriesListComponent implements OnInit {
   titlesMap: Map<string, string> = new Map();
 
-  constructor(private comicsService: ComicsService) {
+  constructor(private seriesService: SeriesService) {
   }
 
   mapTitlesResponse(titlesResponse: string[]) {
@@ -22,8 +22,9 @@ export class ComicsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.comicsService.getAllTitles().subscribe(
+    this.seriesService.getAllTitles().subscribe(
       (response) => this.mapTitlesResponse(response as string[])
     )
   }
+
 }

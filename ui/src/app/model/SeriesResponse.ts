@@ -4,6 +4,7 @@ export interface SeriesResponse {
 
 export interface Series {
   title: string;
+  coverUrl: string;
   seasons?: (Season)[]
 }
 

@@ -8,13 +8,13 @@ import series.Season;
 import series.Series;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class FilmwebScraper implements SeriesScrapeService {
     private static final String BASE_URL = "https://www.filmweb.pl";
     private static final String BASE_URL_SERIES = BASE_URL + "/serial/";
     private static final String TITLE_UNKNOWN = "Title Unknown";
-
 
     @Override
     public String getTitle(String seriesUrl) {
@@ -23,7 +23,7 @@ public class FilmwebScraper implements SeriesScrapeService {
 
     @Override
     public Series getSeries(String seriesUrl) {
-        return new Series(getTitle(seriesUrl), getSeasons(seriesUrl));
+        return new Series(getTitle(seriesUrl), getCover(seriesUrl), getSeasons(seriesUrl));
     }
 
     @Override
@@ -38,6 +38,10 @@ public class FilmwebScraper implements SeriesScrapeService {
         int seasonNumber = extractSeasonNumber(seasonUrl);
         List<Episode> episodes = getEpisodes(seasonUrl);
         return new Season(seasonNumber, episodes);
+    }
+
+    private String getCover(String seriesUrl) {
+        return Objects.requireNonNull(connect(BASE_URL_SERIES + seriesUrl).getElementById("filmPoster")).attr("src");
     }
 
     private List<Episode> getEpisodes(String seasonUrl) {

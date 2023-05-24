@@ -33,6 +33,6 @@ public class NotificationChecker {
 
     private boolean shouldSendEmail(Episode episode) {
         LocalDate premiereDate = LocalDate.parse(episode.premiere());
-        return LocalDate.now().plusDays(1).isEqual(premiereDate);
+        return LocalDate.now().isEqual(premiereDate);
     }
 }

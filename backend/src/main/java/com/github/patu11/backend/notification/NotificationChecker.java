@@ -15,7 +15,7 @@ public class NotificationChecker {
     private final SeriesService seriesService;
 
     @Scheduled(cron = "0 0 1 1/1 * ? *")
-    public void test() {
+    public void task() {
         seriesService.getAllSeriesTitles().forEach(this::notifyAboutPremiere);
     }
 
@@ -26,9 +26,13 @@ public class NotificationChecker {
 
         Episode episode = seriesService.getNextEpisode(seriesUrl);
 
-        LocalDate premiereDate = LocalDate.parse(episode.premiere());
-        if (LocalDate.now().plusDays(1).isEqual(premiereDate)) {
+        if (shouldSendEmail(episode)) {
             emailService.sendEmail(episode, title);
         }
+    }
+
+    private boolean shouldSendEmail(Episode episode) {
+        LocalDate premiereDate = LocalDate.parse(episode.premiere());
+        return LocalDate.now().plusDays(1).isEqual(premiereDate);
     }
 }

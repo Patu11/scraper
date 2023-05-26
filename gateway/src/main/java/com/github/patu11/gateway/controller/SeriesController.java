@@ -1,6 +1,7 @@
 package com.github.patu11.gateway.controller;
 
 import com.github.patu11.gateway.service.SeriesService;
+import common.UrlTitle;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class SeriesController {
     }
 
     @GetMapping("/series/titles")
-    public List<String> allTitles() {
+    public List<UrlTitle> allTitles() {
         return seriesService.getAllTitles();
     }
 

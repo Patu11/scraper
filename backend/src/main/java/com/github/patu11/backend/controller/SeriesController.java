@@ -2,6 +2,7 @@ package com.github.patu11.backend.controller;
 
 
 import com.github.patu11.backend.service.SeriesService;
+import common.UrlTitle;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,7 @@ public class SeriesController {
     }
 
     @GetMapping("/series/titles")
-    public List<String> allTitles() {
+    public List<UrlTitle> allTitles() {
         return seriesService.getAllSeriesTitles();
     }
 

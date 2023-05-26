@@ -1,8 +1,8 @@
 <div>
   <mat-list>
-    <div *ngFor="let entry of titlesMap | keyvalue">
+    <div *ngFor="let entry of titles">
       <mat-list-item>
-        <app-comics-list-entry [title]="entry.value" [rawTitle]="entry.key"></app-comics-list-entry>
+        <app-comics-list-entry [title]="entry.title" [rawTitle]="entry.url"></app-comics-list-entry>
       </mat-list-item>
       <mat-divider></mat-divider>
     </div>

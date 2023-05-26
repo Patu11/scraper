@@ -2,6 +2,7 @@ package com.github.patu11.gateway.service;
 
 
 import comics.ComicResponse;
+import common.UrlTitle;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,7 +20,7 @@ public class ComicsService {
         return restTemplate.getForObject("/comic/" + comicUrl, ComicResponse.class);
     }
 
-    public List<String> getAllTitles() {
-        return Arrays.stream(Objects.requireNonNull(restTemplate.getForEntity("/comic/titles", String[].class).getBody())).toList();
+    public List<UrlTitle> getAllTitles() {
+        return Arrays.stream(Objects.requireNonNull(restTemplate.getForEntity("/comic/titles", UrlTitle[].class).getBody())).toList();
     }
 }

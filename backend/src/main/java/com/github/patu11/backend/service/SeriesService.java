@@ -2,6 +2,7 @@ package com.github.patu11.backend.service;
 
 
 import com.github.patu11.backend.scraper.series.SeriesScrapeService;
+import common.UrlTitle;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import series.Episode;
@@ -22,9 +23,9 @@ public class SeriesService {
         return new SeriesResponse(seriesScrapeService.getSeries(seriesUrl));
     }
 
-    public List<String> getAllSeriesTitles() {
-        return seriesUrls.stream()
-                .map(entry -> entry + ":" + seriesScrapeService.getTitle(entry))
+    public List<UrlTitle> getAllSeriesTitles() {
+        return this.seriesUrls.stream()
+                .map(entry -> new UrlTitle(entry, seriesScrapeService.getTitle(entry)))
                 .toList();
     }
 

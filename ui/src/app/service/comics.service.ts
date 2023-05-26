@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ComicResponse} from "../model/ComicResponse";
+import {UrlTitle} from "../model/UrlTitle";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,6 @@ export class ComicsService {
   }
 
   getAllTitles() {
-    return this.http.get(this.URL + "titles");
+    return this.http.get<UrlTitle[]>(this.URL + "titles");
   }
 }

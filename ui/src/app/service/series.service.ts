@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Episode, SeriesResponse} from "../model/SeriesResponse";
+import {UrlTitle} from "../model/UrlTitle";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class SeriesService {
   }
 
   getAllTitles() {
-    return this.http.get<string[]>(this.URL + "titles");
+    return this.http.get<UrlTitle[]>(this.URL + "titles");
   }
 
   getNextEpisode(seriesUrl: string) {

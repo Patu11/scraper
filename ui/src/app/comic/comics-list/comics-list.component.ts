@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ComicsService} from "../../service/comics.service";
+import {UrlTitle} from "../../model/UrlTitle";
 
 @Component({
   selector: 'app-comics-list',
@@ -7,23 +8,14 @@ import {ComicsService} from "../../service/comics.service";
   styleUrls: ['./comics-list.component.css']
 })
 export class ComicsListComponent implements OnInit {
-  titlesMap: Map<string, string> = new Map();
+  titles: UrlTitle[] = [];
 
   constructor(private comicsService: ComicsService) {
   }
 
-  mapTitlesResponse(titlesResponse: string[]) {
-    titlesResponse.forEach(input => {
-      let split = input.split(":")
-      let key = split[0]
-      let value = split[1]
-      this.titlesMap.set(key, value);
-    });
-  }
-
   ngOnInit(): void {
     this.comicsService.getAllTitles().subscribe(
-      (response) => this.mapTitlesResponse(response as string[])
+      (response) => this.titles = response
     )
   }
 }

@@ -1,5 +1,6 @@
 package com.github.patu11.gateway.service;
 
+import common.UrlTitle;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,8 +20,8 @@ public class SeriesService {
         return restTemplate.getForObject("/series/" + seriesUrl, SeriesResponse.class);
     }
 
-    public List<String> getAllTitles() {
-        return Arrays.stream(Objects.requireNonNull(restTemplate.getForEntity("/series/titles", String[].class).getBody())).toList();
+    public List<UrlTitle> getAllTitles() {
+        return Arrays.stream(Objects.requireNonNull(restTemplate.getForEntity("/series/titles", UrlTitle[].class).getBody())).toList();
     }
 
     public Episode getNextEpisode(String seriesUrl) {

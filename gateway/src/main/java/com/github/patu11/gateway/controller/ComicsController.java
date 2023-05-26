@@ -3,6 +3,7 @@ package com.github.patu11.gateway.controller;
 
 import com.github.patu11.gateway.service.ComicsService;
 import comics.ComicResponse;
+import common.UrlTitle;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class ComicsController {
     }
 
     @GetMapping("/comic/titles")
-    public List<String> allTitles() {
+    public List<UrlTitle> allTitles() {
         return comicsService.getAllTitles();
     }
 }

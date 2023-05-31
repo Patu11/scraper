@@ -20,9 +20,14 @@ import {MatListModule} from "@angular/material/list";
 import {ComicsListEntryComponent} from './comic/comics-list/comics-list-entry/comics-list-entry.component';
 import {ComicRendererComponent} from './comic/comic-renderer/comic-renderer.component';
 import {SeriesListComponent} from './series/series-list/series-list.component';
-import { SeriesListEntryComponent } from './series/series-list/series-list-entry/series-list-entry.component';
-import { SeriesRendererComponent } from './series/series-renderer/series-renderer.component';
-import { SeriesComponent } from './series/series-renderer/series/series.component';
+import {SeriesListEntryComponent} from './series/series-list/series-list-entry/series-list-entry.component';
+import {SeriesRendererComponent} from './series/series-renderer/series-renderer.component';
+import {SeriesComponent} from './series/series-renderer/series/series.component';
+import {MatCardModule} from "@angular/material/card";
+import {ToolbarComponent} from './toolbar/toolbar.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatIconModule} from "@angular/material/icon";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 @NgModule({
   declarations: [
@@ -37,7 +42,8 @@ import { SeriesComponent } from './series/series-renderer/series/series.componen
     SeriesListComponent,
     SeriesListEntryComponent,
     SeriesRendererComponent,
-    SeriesComponent
+    SeriesComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +56,11 @@ import { SeriesComponent } from './series/series-renderer/series/series.componen
     MatInputModule,
     MatSelectModule,
     MatProgressBarModule,
-    MatListModule
+    MatListModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

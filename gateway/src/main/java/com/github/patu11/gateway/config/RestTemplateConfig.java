@@ -6,8 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.File;
-
 @Configuration
 public class RestTemplateConfig {
 
@@ -16,17 +14,6 @@ public class RestTemplateConfig {
 
     @Bean
     public RestTemplate createRestTemplate(RestTemplateBuilder builder) {
-        return builder.rootUri(adjustUrl()).build();
-    }
-
-    private String adjustUrl() {
-        return isDockerized() ?
-                this.comicsBackendUrl.replace("localhost", "backend") :
-                this.comicsBackendUrl;
-    }
-
-    private boolean isDockerized() {
-        File f = new File("/.dockerenv");
-        return f.exists();
+        return builder.rootUri(comicsBackendUrl).build();
     }
 }

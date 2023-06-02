@@ -1,15 +1,12 @@
 <div>
   <mat-toolbar color="primary">
-    <!--    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">-->
-    <!--      <mat-icon>menu</mat-icon>-->
-    <!--    </button>-->
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="onMenuChange('series')" mat-menu-item>Series</button>
+      <button (click)="onMenuChange('comics')" mat-menu-item>Comics</button>
+    </mat-menu>
     <span>Scraper service</span>
-
-    <button mat-button color="secondary">
-      Series
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
   </mat-toolbar>
 </div>

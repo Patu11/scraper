@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CommonService} from "../service/common.service";
 
 @Component({
   selector: 'app-toolbar',
@@ -7,7 +8,11 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() {
+  constructor(private commonService: CommonService) {
+  }
+
+  onMenuChange(event: string) {
+    this.commonService.onMenuClick(event);
   }
 
   ngOnInit(): void {

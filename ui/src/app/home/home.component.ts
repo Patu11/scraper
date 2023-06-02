@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CommonService} from "../service/common.service";
 
 @Component({
   selector: 'app-home',
@@ -6,11 +7,12 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  currentType: string = 'series';
 
-  constructor() {
+  constructor(private commonService: CommonService) {
   }
 
   ngOnInit(): void {
+    this.commonService.clickedMenuEntry.subscribe((data) => this.currentType = data);
   }
-
 }

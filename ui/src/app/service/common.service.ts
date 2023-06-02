@@ -5,10 +5,13 @@ import {EventEmitter, Injectable, Output} from '@angular/core';
 })
 export class CommonService {
   @Output()
-  clickedComicTitle = new EventEmitter<string>();
+  clickedComicTitle: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
   clickedSeriesTitle: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output()
+  clickedMenuEntry: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
   }
@@ -19,5 +22,9 @@ export class CommonService {
 
   onSeriesTitleClicked(rawTitle: string) {
     this.clickedSeriesTitle.emit(rawTitle);
+  }
+
+  onMenuClick(entry: string) {
+    this.clickedMenuEntry.emit(entry);
   }
 }

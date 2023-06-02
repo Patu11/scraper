@@ -1,8 +1,12 @@
 <div>
   <app-toolbar></app-toolbar>
-  <!--  <app-comics-list></app-comics-list>-->
-  <!--  <app-comic-renderer></app-comic-renderer>-->
-  <app-series-list></app-series-list>
-  <app-series-renderer></app-series-renderer>
-</div>
 
+  <div *ngIf="currentType==='comics'">
+    <app-comics-list></app-comics-list>
+    <app-comic-renderer></app-comic-renderer>
+  </div>
+  <div *ngIf="currentType==='series'">
+    <app-series-list></app-series-list>
+    <app-series-renderer></app-series-renderer>
+  </div>
+</div>

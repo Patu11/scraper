@@ -9,6 +9,7 @@ import {UrlTitle} from "../../model/UrlTitle";
 })
 export class SeriesListComponent implements OnInit {
   urlTitles: UrlTitle[] = [];
+  showError: boolean = false;
 
   constructor(private seriesService: SeriesService) {
   }
@@ -17,6 +18,10 @@ export class SeriesListComponent implements OnInit {
     this.seriesService.getAllTitles().subscribe(
       (response) => {
         this.urlTitles = response;
+        this.showError = false;
+      },
+      (error) => {
+        this.showError = true;
       }
     )
   }

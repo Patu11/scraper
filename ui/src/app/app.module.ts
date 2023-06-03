@@ -28,6 +28,7 @@ import {ToolbarComponent} from './toolbar/toolbar.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { ErrorComponent } from './error/error/error.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     SeriesListEntryComponent,
     SeriesRendererComponent,
     SeriesComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

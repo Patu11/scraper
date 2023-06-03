@@ -1,5 +1,6 @@
 <div>
   <mat-list>
+    <app-error [show]="showError" message="Error when requesting data."></app-error>
     <div *ngFor="let entry of titles">
       <mat-list-item>
         <app-comics-list-entry [title]="entry.title" [rawTitle]="entry.url"></app-comics-list-entry>

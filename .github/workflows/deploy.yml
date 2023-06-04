@@ -3,7 +3,7 @@ name: Remote SSH Deploy
 on:
   push:
     branches:
-      - deploy-action
+      - main
 jobs:
   deploy:
     name: Deploy

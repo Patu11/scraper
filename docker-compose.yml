@@ -20,6 +20,8 @@ services:
       - "4200:80"
     depends_on:
       - app
+    links:
+      - app
 
   redis:
     image: redis

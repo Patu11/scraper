@@ -13,6 +13,7 @@ services:
       - cache
     env_file:
       - .env
+    network_mode: host
 
   ui:
     build: ui
@@ -20,8 +21,7 @@ services:
       - "4200:80"
     depends_on:
       - app
-    links:
-      - app
+    network_mode: host
 
   redis:
     image: redis

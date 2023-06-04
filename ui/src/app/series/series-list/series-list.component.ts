@@ -17,16 +17,16 @@ export class SeriesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.seriesService.getAllTitles().subscribe(
-      (response) => {
+    this.seriesService.getAllTitles().subscribe({
+      next: (response) => {
         this.urlTitles = response;
         this.showError = false;
         this.loading = false;
       },
-      () => {
+      error: () => {
         this.showError = true;
         this.loading = false;
       }
-    )
+    })
   }
 }

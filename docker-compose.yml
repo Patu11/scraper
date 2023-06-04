@@ -5,15 +5,14 @@ services:
     ports:
       - "8080:8080"
       - "8081:8081"
-#    links:
-#      - redis
+    links:
+      - redis
     depends_on:
       - redis
     networks:
       - cache
     env_file:
       - .env
-    network_mode: host
 
   ui:
     build: ui
@@ -21,7 +20,6 @@ services:
       - "4200:80"
     depends_on:
       - app
-    network_mode: host
 
   redis:
     image: redis

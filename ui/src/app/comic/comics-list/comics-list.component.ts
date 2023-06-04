@@ -10,18 +10,22 @@ import {UrlTitle} from "../../model/UrlTitle";
 export class ComicsListComponent implements OnInit {
   titles: UrlTitle[] = [];
   showError: boolean = false;
+  loading: boolean = false;
 
   constructor(private comicsService: ComicsService) {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.comicsService.getAllTitles().subscribe(
       (response) => {
         this.titles = response;
         this.showError = false;
+        this.loading = false;
       },
-      (error) => {
-        this.showError = true
+      () => {
+        this.showError = true;
+        this.loading = false;
       }
     )
   }

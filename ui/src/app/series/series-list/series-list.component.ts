@@ -10,18 +10,22 @@ import {UrlTitle} from "../../model/UrlTitle";
 export class SeriesListComponent implements OnInit {
   urlTitles: UrlTitle[] = [];
   showError: boolean = false;
+  loading: boolean = false;
 
   constructor(private seriesService: SeriesService) {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.seriesService.getAllTitles().subscribe(
       (response) => {
         this.urlTitles = response;
         this.showError = false;
+        this.loading = false;
       },
-      (error) => {
+      () => {
         this.showError = true;
+        this.loading = false;
       }
     )
   }

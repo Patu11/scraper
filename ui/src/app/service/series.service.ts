@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Episode, SeriesResponse} from "../model/SeriesResponse";
 import {UrlTitle} from "../model/UrlTitle";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SeriesService {
-  private URL: string = 'http://localhost:8080/api/v1/series/';
+  private URL: string = environment.apiUrl + 'series/';
 
   constructor(private http: HttpClient) {
   }

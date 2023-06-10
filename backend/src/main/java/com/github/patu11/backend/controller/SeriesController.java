@@ -2,14 +2,15 @@ package com.github.patu11.backend.controller;
 
 
 import com.github.patu11.backend.service.SeriesService;
-import common.UrlTitle;
+import com.github.patu11.backend.model.common.UrlTitle;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import series.Episode;
-import series.SeriesResponse;
+import com.github.patu11.backend.model.series.Episode;
+import com.github.patu11.backend.model.series.SeriesResponse;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
 public class SeriesController {
     private final SeriesService seriesService;
 
+    @Cacheable(value = "series")
     @GetMapping("/series/{seriesUrl}")
     public SeriesResponse series(@PathVariable String seriesUrl) {
         System.out.println("Received request for series: " + seriesUrl);
@@ -30,6 +32,7 @@ public class SeriesController {
         return seriesService.getAllSeriesTitles();
     }
 
+    @Cacheable(value = "nextEpisode")
     @GetMapping("/series/{seriesUrl}/episodes/next")
     public Episode nextEpisode(@PathVariable String seriesUrl) {
         return seriesService.getNextEpisode(seriesUrl);

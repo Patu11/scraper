@@ -1,11 +1,11 @@
 package com.github.patu11.backend.notification;
 
 import com.github.patu11.backend.service.SeriesService;
-import common.UrlTitle;
+import com.github.patu11.backend.model.common.UrlTitle;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import series.Episode;
+import com.github.patu11.backend.model.series.Episode;
 
 import java.time.LocalDate;
 

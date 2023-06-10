@@ -1,4 +1,4 @@
-package comics;
+package com.github.patu11.backend.model.comics;
 
 import java.io.Serializable;
 import java.util.List;

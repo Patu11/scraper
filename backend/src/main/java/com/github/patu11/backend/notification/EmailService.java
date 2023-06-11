@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import com.github.patu11.backend.model.series.Episode;
+import com.github.patu11.backend.model.common.Episode;
 
 @Service
 @AllArgsConstructor

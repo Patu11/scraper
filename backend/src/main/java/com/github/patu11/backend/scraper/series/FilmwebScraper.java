@@ -3,7 +3,7 @@ package com.github.patu11.backend.scraper.series;
 
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
-import com.github.patu11.backend.model.series.Episode;
+import com.github.patu11.backend.model.common.Episode;
 import com.github.patu11.backend.model.series.Season;
 import com.github.patu11.backend.model.series.Series;
 

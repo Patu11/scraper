@@ -5,7 +5,7 @@ import com.github.patu11.backend.model.common.UrlTitle;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import com.github.patu11.backend.model.series.Episode;
+import com.github.patu11.backend.model.common.Episode;
 
 import java.time.LocalDate;
 

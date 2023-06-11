@@ -1,16 +1,10 @@
 version: '3'
+
 services:
   app:
-    build: .
+    build: backend
     ports:
       - "8080:8080"
-      - "8081:8081"
-    links:
-      - redis
-    depends_on:
-      - redis
-    networks:
-      - cache
     env_file:
       - .env
 
@@ -18,16 +12,8 @@ services:
     build: ui
     ports:
       - "4200:80"
-    depends_on:
-      - app
 
   redis:
     image: redis
     ports:
       - "6379:6379"
-    networks:
-      - cache
-    command: redis-server --appendonly yes --replica-read-only no
-
-networks:
-  cache:

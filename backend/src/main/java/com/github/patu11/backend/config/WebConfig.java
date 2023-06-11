@@ -1,5 +1,4 @@
-package com.github.patu11.gateway.config;
-
+package com.github.patu11.backend.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

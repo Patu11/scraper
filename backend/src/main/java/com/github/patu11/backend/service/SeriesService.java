@@ -2,12 +2,12 @@ package com.github.patu11.backend.service;
 
 
 import com.github.patu11.backend.scraper.series.SeriesScrapeService;
-import common.UrlTitle;
+import com.github.patu11.backend.model.common.UrlTitle;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import series.Episode;
-import series.Season;
-import series.SeriesResponse;
+import com.github.patu11.backend.model.series.Episode;
+import com.github.patu11.backend.model.series.Season;
+import com.github.patu11.backend.model.series.SeriesResponse;
 
 import java.time.LocalDate;
 import java.util.List;

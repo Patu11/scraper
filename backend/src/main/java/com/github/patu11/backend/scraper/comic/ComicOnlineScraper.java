@@ -1,8 +1,8 @@
 package com.github.patu11.backend.scraper.comic;
 
-import comics.Chapter;
-import comics.Comic;
-import comics.Page;
+import com.github.patu11.backend.model.comics.Chapter;
+import com.github.patu11.backend.model.comics.Comic;
+import com.github.patu11.backend.model.comics.Page;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;

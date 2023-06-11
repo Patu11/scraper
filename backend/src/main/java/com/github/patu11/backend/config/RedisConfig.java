@@ -1,4 +1,4 @@
-package com.github.patu11.gateway.config;
+package com.github.patu11.backend.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,6 @@ import java.time.Duration;
 
 @Configuration
 public class RedisConfig {
-
     @Value("${spring.data.redis.host}")
     private String hostname;
 

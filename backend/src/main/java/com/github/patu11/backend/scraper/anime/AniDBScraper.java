@@ -30,7 +30,8 @@ public class AniDBScraper implements AnimeScrapeService {
                 .orElse(StringUtil.EMPTY_STRING);
     }
 
-    private List<Episode> getEpisodes(String animeId) {
+    @Override
+    public List<Episode> getEpisodes(String animeId) {
         Element episodesTable = connect(BASE_URL + animeId).getElementById("eplist");
         if (episodesTable == null) {
             return Collections.emptyList();

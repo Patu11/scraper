@@ -1,10 +1,11 @@
 package com.github.patu11.backend.service;
 
 
-import com.github.patu11.backend.scraper.comic.ComicsScrapeService;
 import com.github.patu11.backend.model.comics.Comic;
 import com.github.patu11.backend.model.comics.ComicResponse;
+import com.github.patu11.backend.model.common.Type;
 import com.github.patu11.backend.model.common.UrlTitle;
+import com.github.patu11.backend.scraper.comic.ComicsScrapeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class ComicsService {
 
     public List<UrlTitle> getAllComicsTitles() {
         return this.comicNames.stream()
-                .map(entry -> new UrlTitle(entry, comicsScrapeService.getTitle(entry)))
+                .map(entry -> new UrlTitle(entry, comicsScrapeService.getTitle(entry), Type.COMIC))
                 .toList();
     }
 }

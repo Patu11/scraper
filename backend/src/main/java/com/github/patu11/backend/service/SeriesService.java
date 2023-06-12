@@ -2,6 +2,7 @@ package com.github.patu11.backend.service;
 
 
 import com.github.patu11.backend.model.common.Episode;
+import com.github.patu11.backend.model.common.Type;
 import com.github.patu11.backend.model.common.UrlTitle;
 import com.github.patu11.backend.model.series.Season;
 import com.github.patu11.backend.model.series.SeriesResponse;
@@ -15,7 +16,7 @@ import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
-public class SeriesService {
+public class SeriesService implements CommonService {
     private final List<String> seriesUrls;
     private final SeriesScrapeService seriesScrapeService;
 
@@ -25,7 +26,7 @@ public class SeriesService {
 
     public List<UrlTitle> getAllSeriesTitles() {
         return this.seriesUrls.stream()
-                .map(entry -> new UrlTitle(entry, seriesScrapeService.getTitle(entry)))
+                .map(entry -> new UrlTitle(entry, seriesScrapeService.getTitle(entry), Type.SERIES))
                 .toList();
     }
 

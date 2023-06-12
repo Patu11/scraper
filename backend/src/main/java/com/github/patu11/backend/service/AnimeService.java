@@ -2,19 +2,20 @@ package com.github.patu11.backend.service;
 
 import com.github.patu11.backend.model.anime.Anime;
 import com.github.patu11.backend.model.common.Episode;
+import com.github.patu11.backend.model.common.Type;
 import com.github.patu11.backend.model.common.UrlTitle;
 import com.github.patu11.backend.scraper.anime.AnimeScrapeService;
+import com.github.patu11.backend.utils.AnimeUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
-public class AnimeService {
+public class AnimeService implements CommonService {
     private final List<String> animeIds;
     private final AnimeScrapeService animeScrapeService;
 
@@ -24,7 +25,7 @@ public class AnimeService {
 
     public List<UrlTitle> getAllAnimeIds() {
         return this.animeIds.stream()
-                .map(entry -> new UrlTitle(entry, animeScrapeService.getTitle(entry)))
+                .map(entry -> new UrlTitle(entry, animeScrapeService.getTitle(entry), Type.ANIME))
                 .toList();
     }
 
@@ -36,10 +37,7 @@ public class AnimeService {
     }
 
     private boolean isPremiereAfterToday(Episode episode) {
-        String premiere = episode.premiere();
-        List<Integer> dateParts = Arrays.stream(premiere.split("\\.")).map(Integer::parseInt).toList();
-
-        LocalDate premiereDate = LocalDate.of(dateParts.get(2), dateParts.get(1), dateParts.get(0));
+        LocalDate premiereDate = AnimeUtils.parseDate(episode.premiere());
         return premiereDate.isAfter(LocalDate.now());
     }
 }

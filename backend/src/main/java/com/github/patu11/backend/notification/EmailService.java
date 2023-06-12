@@ -1,10 +1,10 @@
 package com.github.patu11.backend.notification;
 
+import com.github.patu11.backend.model.common.Episode;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import com.github.patu11.backend.model.common.Episode;
 
 @Service
 @AllArgsConstructor
@@ -20,7 +20,7 @@ public class EmailService {
     }
 
     private String createSubject(String title) {
-        return String.format("%s new episode tomorrow", title);
+        return String.format("%s new episode today", title);
     }
 
     private String createBody(Episode episode) {

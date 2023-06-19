@@ -1,0 +1,13 @@
+<div>
+  <h1 class="info">Anime list</h1>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <mat-list>
+    <app-error [show]="showError" message="Error when requesting data."></app-error>
+    <div *ngFor="let entry of urlTitles">
+      <mat-list-item>
+        <app-anime-list-entry [title]="entry.title" [rawTitle]="entry.url"></app-anime-list-entry>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-list>
+</div>

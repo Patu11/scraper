@@ -22,5 +22,4 @@ export class SeriesListEntryComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

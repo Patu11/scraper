@@ -34,6 +34,10 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
+import {AnimeListComponent} from './anime/anime-list/anime-list.component';
+import {AnimeListEntryComponent} from './anime/anime-list/anime-list-entry/anime-list-entry.component';
+import {AnimeRendererComponent} from './anime/anime-renderer/anime-renderer.component';
+import {AnimeComponent} from './anime/anime-renderer/anime/anime/anime.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import {MatCardModule} from "@angular/material/card";
     SeriesRendererComponent,
     SeriesComponent,
     ToolbarComponent,
-    ErrorComponent
+    ErrorComponent,
+    AnimeListComponent,
+    AnimeListEntryComponent,
+    AnimeRendererComponent,
+    AnimeComponent
   ],
   imports: [
     BrowserModule,

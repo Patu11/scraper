@@ -5,6 +5,7 @@ import com.github.patu11.backend.model.common.Episode;
 import com.github.patu11.backend.model.common.UrlTitle;
 import com.github.patu11.backend.service.AnimeService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +20,9 @@ import java.util.List;
 public class AnimeController {
     private final AnimeService animeService;
 
-    @Cacheable(value = "anime")
     @GetMapping("/anime/{animeId}")
-    public Anime anime(@PathVariable("animeId") String animeId) {
+    @Cacheable(value = "anime", condition = "#enableCache")
+    public Anime anime(@PathVariable("animeId") String animeId, @Value("${anime.cache.enable}") boolean enableCache) {
         System.out.println("Received request for anime with id: " + animeId);
         return animeService.getAnime(animeId);
     }
@@ -31,9 +32,9 @@ public class AnimeController {
         return animeService.getAllAnimeIds();
     }
 
-    @Cacheable(value = "animeNextEpisode")
     @GetMapping("/anime/{animeId}/episodes/next")
-    public Episode nextEpisode(@PathVariable("animeId") String animeId) {
+    @Cacheable(value = "animeNextEpisode", condition = "#enableCache")
+    public Episode nextEpisode(@PathVariable("animeId") String animeId, @Value("${anime.cache.enable}") boolean enableCache) {
         return animeService.getNextEpisode(animeId);
     }
 }

@@ -11,6 +11,9 @@ export class CommonService {
   clickedSeriesTitle: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
+  clickedAnimeTitle: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output()
   clickedMenuEntry: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
@@ -22,6 +25,10 @@ export class CommonService {
 
   onSeriesTitleClicked(rawTitle: string) {
     this.clickedSeriesTitle.emit(rawTitle);
+  }
+
+  onAnimeTitleClicked(rawTitle: string) {
+    this.clickedAnimeTitle.emit(rawTitle);
   }
 
   onMenuClick(entry: string) {

@@ -6,6 +6,7 @@ import com.github.patu11.backend.model.common.UrlTitle;
 import com.github.patu11.backend.model.series.SeriesResponse;
 import com.github.patu11.backend.service.SeriesService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +21,9 @@ import java.util.List;
 public class SeriesController {
     private final SeriesService seriesService;
 
-    @Cacheable(value = "series")
     @GetMapping("/series/{seriesUrl}")
-    public SeriesResponse series(@PathVariable String seriesUrl) {
+    @Cacheable(value = "series", condition = "#enableCache")
+    public SeriesResponse series(@PathVariable String seriesUrl, @Value("${series.cache.enable}") boolean enableCache) {
         System.out.println("Received request for series: " + seriesUrl);
         return seriesService.getSeries(seriesUrl);
     }
@@ -31,10 +32,10 @@ public class SeriesController {
     public List<UrlTitle> allTitles() {
         return seriesService.getAllSeriesTitles();
     }
-
-    @Cacheable(value = "seriesNextEpisode")
+    
     @GetMapping("/series/{seriesUrl}/episodes/next")
-    public Episode nextEpisode(@PathVariable String seriesUrl) {
+    @Cacheable(value = "seriesNextEpisode", condition = "#enableCache")
+    public Episode nextEpisode(@PathVariable String seriesUrl, @Value("${series.cache.enable}") boolean enableCache) {
         return seriesService.getNextEpisode(seriesUrl);
     }
 }

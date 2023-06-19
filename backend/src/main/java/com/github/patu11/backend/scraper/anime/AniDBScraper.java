@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AniDBScraper implements AnimeScrapeService {
@@ -40,7 +39,8 @@ public class AniDBScraper implements AnimeScrapeService {
         return episodesTable.getElementsByTag("tr").stream()
                 .filter(el -> !el.hasClass("header"))
                 .filter(el -> !isOpeningOrEnding(el))
-                .map(this::mapEpisode).collect(Collectors.toList());
+                .map(this::mapEpisode)
+                .toList();
     }
 
     private Episode mapEpisode(Element element) {

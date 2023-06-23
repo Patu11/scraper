@@ -1,12 +1,14 @@
 package com.github.patu11.backend.scraper.series;
 
 
-import org.jsoup.nodes.Element;
-import org.springframework.stereotype.Service;
 import com.github.patu11.backend.model.common.Episode;
 import com.github.patu11.backend.model.series.Season;
 import com.github.patu11.backend.model.series.Series;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,10 +27,16 @@ public class FilmwebScraper implements SeriesScrapeService {
     public Series getSeries(String seriesUrl) {
         return new Series(getTitle(seriesUrl), getCover(seriesUrl), getSeasons(seriesUrl));
     }
-
+    
     @Override
     public List<Season> getSeasons(String seriesUrl) {
-        return connect(BASE_URL_SERIES + seriesUrl).getElementsByClass("squareNavigation__item").eachAttr("href")
+        Elements seasonsElement = connect(BASE_URL_SERIES + seriesUrl).getElementsByClass("squareNavigation__item");
+
+        if (seasonsElement.isEmpty()) {
+            return Collections.singletonList(new Season(1, getEpisodes("/serial/" + seriesUrl + "/episode/list")));
+        }
+
+        return seasonsElement.eachAttr("href")
                 .stream()
                 .map(this::mapSeason)
                 .toList();

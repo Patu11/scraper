@@ -22,9 +22,8 @@ public class ScrapingPropertiesService {
     }
 
     public List<ScrapingPropertyDto> getAllPropertiesByType(String type) {
-        List<ScrapingProperty> scrapingProperties = this.scrapingPropertiesRepository.findAllByType(type);
-        return scrapingProperties.stream()
-                .map(this::mapScrapingProperty)
+        return this.getAllProperties().stream()
+                .filter(property -> property.type().equalsIgnoreCase(type))
                 .toList();
     }
 
@@ -35,5 +34,11 @@ public class ScrapingPropertiesService {
 
     private ScrapingPropertyDto mapScrapingProperty(ScrapingProperty scrapingProperty) {
         return new ScrapingPropertyDto(scrapingProperty.getName(), scrapingProperty.getType());
+    }
+
+    private List<ScrapingPropertyDto> getAllProperties() {
+        return this.scrapingPropertiesRepository.findAll().stream()
+                .map(this::mapScrapingProperty)
+                .toList();
     }
 }

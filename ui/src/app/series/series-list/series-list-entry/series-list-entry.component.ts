@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommonService} from "../../../service/common.service";
+import {SeriesService} from "../../../service/series.service";
 
 @Component({
   selector: 'app-series-list-entry',
@@ -7,13 +8,12 @@ import {CommonService} from "../../../service/common.service";
   styleUrls: ['./series-list-entry.component.css']
 })
 export class SeriesListEntryComponent implements OnInit {
-  @Input()
   title: string = '';
 
   @Input()
   rawTitle: string = '';
 
-  constructor(private commonService: CommonService) {
+  constructor(private commonService: CommonService, private seriesService: SeriesService) {
   }
 
   onTitleClick() {
@@ -21,5 +21,9 @@ export class SeriesListEntryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.seriesService.getTitle(this.rawTitle).subscribe({
+      next: (response) => this.title = response,
+      error: (error) => console.log(error)
+    })
   }
 }

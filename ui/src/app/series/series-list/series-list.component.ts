@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {SeriesService} from "../../service/series.service";
-import {UrlTitle} from "../../model/UrlTitle";
+import {ScrapingPropertiesService} from "../../service/scraping-properties.service";
+import {ScrapingProperty} from "../../model/ScrapingProperty";
 
 @Component({
   selector: 'app-series-list',
@@ -8,16 +8,16 @@ import {UrlTitle} from "../../model/UrlTitle";
   styleUrls: ['./series-list.component.css']
 })
 export class SeriesListComponent implements OnInit {
-  urlTitles: UrlTitle[] = [];
+  urlTitles: ScrapingProperty[] = [];
   showError: boolean = false;
   loading: boolean = false;
 
-  constructor(private seriesService: SeriesService) {
+  constructor(private scrapingPropertiesService: ScrapingPropertiesService) {
   }
 
   ngOnInit(): void {
     this.loading = true;
-    this.seriesService.getAllTitles().subscribe({
+    this.scrapingPropertiesService.getPropertiesByType("series").subscribe({
       next: (response) => {
         this.urlTitles = response;
         this.showError = false;
@@ -27,6 +27,6 @@ export class SeriesListComponent implements OnInit {
         this.showError = true;
         this.loading = false;
       }
-    })
+    });
   }
 }

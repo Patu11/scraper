@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Episode, SeriesResponse} from "../model/SeriesResponse";
-import {UrlTitle} from "../model/UrlTitle";
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -17,10 +16,10 @@ export class SeriesService {
     return this.http.get<SeriesResponse>(this.URL + seriesUrl);
   }
 
-  getAllTitles() {
-    return this.http.get<UrlTitle[]>(this.URL + "titles");
+  getTitle(seriesUrl: string) {
+    return this.http.get(this.URL + "title/" + seriesUrl, {responseType: "text"});
   }
-
+  
   getNextEpisode(seriesUrl: string) {
     return this.http.get<Episode>(this.URL + seriesUrl + "/episodes/next");
   }

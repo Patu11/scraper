@@ -9,7 +9,6 @@ import com.github.patu11.backend.service.SeriesService;
 import com.github.patu11.backend.utils.AnimeUtils;
 import com.github.patu11.backend.utils.SeriesUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -34,11 +33,11 @@ public class NotificationChecker {
         );
     }
 
-    @Scheduled(cron = "0 0 1 * * ?")
-    public void task() {
-        seriesService.getAllSeriesTitles().forEach(this::notifyAboutPremiere);
-        animeService.getAllAnimeIds().forEach(this::notifyAboutPremiere);
-    }
+//    @Scheduled(cron = "0 0 1 * * ?")
+//    public void task() {
+//        seriesService.getAllSeriesTitles().forEach(this::notifyAboutPremiere);
+//        animeService.getAllAnimeIds().forEach(this::notifyAboutPremiere);
+//    }
 
     private void notifyAboutPremiere(UrlTitle urlTitle) {
         Type type = urlTitle.type();

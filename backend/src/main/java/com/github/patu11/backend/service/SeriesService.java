@@ -36,7 +36,7 @@ public class SeriesService implements CommonService {
                 .flatMap(List::stream)
                 .filter(this::isPremiereAfterToday)
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow(() -> new NoSuchElementException("[Series] Next episode not found for: " + seriesUrl));
     }
 
     private boolean isPremiereAfterToday(Episode episode) {

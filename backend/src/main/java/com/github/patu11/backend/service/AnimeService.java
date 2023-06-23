@@ -33,7 +33,7 @@ public class AnimeService implements CommonService {
         return animeScrapeService.getEpisodes(animeId).stream()
                 .filter(this::isPremiereAfterToday)
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("[Anime] Next episode not found."));
+                .orElseThrow(() -> new NoSuchElementException("[Anime] Next episode not found for: " + animeId));
     }
 
     private boolean isPremiereAfterToday(Episode episode) {

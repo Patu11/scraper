@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @Service
@@ -33,7 +34,8 @@ public class NotificationChecker {
         );
     }
 
-    @Scheduled(cron = "0 0 1 * * ?")
+    //    @Scheduled(cron = "0 0 1 * * ?")
+    @Scheduled(fixedDelay = 5000)
     public void task() {
         seriesService.getAllSeriesTitles().forEach(this::notifyAboutPremiere);
         animeService.getAllAnimeIds().forEach(this::notifyAboutPremiere);
@@ -41,17 +43,22 @@ public class NotificationChecker {
 
     private void notifyAboutPremiere(UrlTitle urlTitle) {
         Type type = urlTitle.type();
-        Episode nextEpisode = SERVICES.get(type).getNextEpisode(urlTitle.url());
 
-        if (shouldSendEmail(nextEpisode, type)) {
-            emailService.sendEmail(nextEpisode, urlTitle.title());
+        try {
+            Episode nextEpisode = SERVICES.get(type).getNextEpisode(urlTitle.url());
+
+            if (shouldSendEmail(nextEpisode, type)) {
+                emailService.sendEmail(nextEpisode, urlTitle.title());
+            }
+        } catch (Exception exception) {
+            System.out.printf("%s %s%n", LocalDateTime.now(), exception.getMessage());
         }
     }
 
     private boolean shouldSendEmail(Episode episode, Type type) {
         String premiere = episode.premiere();
         LocalDate now = LocalDate.now();
-        
+
         return switch (type) {
             case ANIME -> now.isEqual(AnimeUtils.parseDate(premiere));
             case SERIES -> SeriesUtils.isValidSeriesDate(premiere) && now.isEqual(LocalDate.parse(premiere));

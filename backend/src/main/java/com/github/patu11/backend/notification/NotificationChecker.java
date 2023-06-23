@@ -34,8 +34,7 @@ public class NotificationChecker {
         );
     }
 
-    //    @Scheduled(cron = "0 0 1 * * ?")
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(cron = "0 0 1 * * ?")
     public void task() {
         seriesService.getAllSeriesTitles().forEach(this::notifyAboutPremiere);
         animeService.getAllAnimeIds().forEach(this::notifyAboutPremiere);

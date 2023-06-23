@@ -2,13 +2,15 @@ package com.github.patu11.backend.notification;
 
 import com.github.patu11.backend.model.common.Episode;
 import com.github.patu11.backend.model.common.Type;
-import com.github.patu11.backend.model.common.UrlTitle;
+import com.github.patu11.backend.model.dto.ScrapingPropertyDto;
 import com.github.patu11.backend.service.AnimeService;
 import com.github.patu11.backend.service.CommonService;
+import com.github.patu11.backend.service.ScrapingPropertiesService;
 import com.github.patu11.backend.service.SeriesService;
 import com.github.patu11.backend.utils.AnimeUtils;
 import com.github.patu11.backend.utils.SeriesUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,35 +20,36 @@ import java.util.Map;
 @Service
 public class NotificationChecker {
     private final EmailService emailService;
-    private final SeriesService seriesService;
-    private final AnimeService animeService;
+    private final ScrapingPropertiesService scrapingPropertiesService;
     private final Map<Type, CommonService> SERVICES;
 
     @Autowired
-    public NotificationChecker(EmailService emailService, SeriesService seriesService, AnimeService animeService) {
+    public NotificationChecker(EmailService emailService, SeriesService seriesService, AnimeService animeService, ScrapingPropertiesService scrapingPropertiesService) {
         this.emailService = emailService;
-        this.seriesService = seriesService;
-        this.animeService = animeService;
+        this.scrapingPropertiesService = scrapingPropertiesService;
         SERVICES = Map.of(
                 Type.ANIME, animeService,
                 Type.SERIES, seriesService
         );
     }
 
-//    @Scheduled(cron = "0 0 1 * * ?")
-//    public void task() {
-//        seriesService.getAllSeriesTitles().forEach(this::notifyAboutPremiere);
-//        animeService.getAllAnimeIds().forEach(this::notifyAboutPremiere);
-//    }
+    @Scheduled(cron = "0 0 1 * * ?")
+    public void task() {
+        scrapingPropertiesService.getAllPropertiesByType(Type.ANIME.getName()).forEach(this::notifyAboutPremiere);
+        scrapingPropertiesService.getAllPropertiesByType(Type.SERIES.getName()).forEach(this::notifyAboutPremiere);
+    }
 
-    private void notifyAboutPremiere(UrlTitle urlTitle) {
-        Type type = urlTitle.type();
+    private void notifyAboutPremiere(ScrapingPropertyDto scrapingPropertyDto) {
+        Type type = Type.fromString(scrapingPropertyDto.type());
 
         try {
-            Episode nextEpisode = SERVICES.get(type).getNextEpisode(urlTitle.url());
+            CommonService service = SERVICES.get(type);
+            Episode nextEpisode = service.getNextEpisode(scrapingPropertyDto.name());
 
             if (shouldSendEmail(nextEpisode, type)) {
-                emailService.sendEmail(nextEpisode, urlTitle.title());
+                String title = service.getTitle(scrapingPropertyDto.name());
+                emailService.sendEmail(nextEpisode, title);
+                System.out.println("Email sent.");
             }
         } catch (Exception exception) {
             System.out.printf("%s %s%n", LocalDateTime.now(), exception.getMessage());

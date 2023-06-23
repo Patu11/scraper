@@ -19,10 +19,12 @@ public class AnimeService implements CommonService {
         return animeScrapeService.getAnime(animeId);
     }
 
+    @Override
     public String getTitle(String animeId) {
         return this.animeScrapeService.getTitle(animeId);
     }
 
+    @Override
     public Episode getNextEpisode(String animeId) {
         return animeScrapeService.getEpisodes(animeId).stream()
                 .filter(this::isPremiereAfterToday)

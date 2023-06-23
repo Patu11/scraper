@@ -21,10 +21,12 @@ public class SeriesService implements CommonService {
         return new SeriesResponse(seriesScrapeService.getSeries(seriesUrl));
     }
 
+    @Override
     public String getTitle(String seriesUrl) {
         return seriesScrapeService.getTitle(seriesUrl);
     }
 
+    @Override
     public Episode getNextEpisode(String seriesUrl) {
         return seriesScrapeService.getSeasons(seriesUrl).stream()
                 .map(Season::episodes)

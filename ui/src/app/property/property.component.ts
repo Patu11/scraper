@@ -19,10 +19,9 @@ export class PropertyComponent {
       name: this.name,
       type: this.type
     };
-    
+
     this.scrapingPropertiesService.addProperty(property).subscribe({
-      next: (response) => console.log(response),
-      error: (error) => console.log(error)
+      next: () => this.name = ''
     });
   }
 

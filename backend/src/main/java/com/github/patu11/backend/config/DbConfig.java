@@ -26,16 +26,13 @@ public class DbConfig {
     @Bean
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        System.out.println("Is dockerized: " + ConfigUtils.isDockerized());
-        System.out.println(url);
-        System.out.println(adjustUrl());
         dataSourceBuilder.driverClassName(driver);
         dataSourceBuilder.url(adjustUrl());
         dataSourceBuilder.username(username);
         dataSourceBuilder.password(password);
         return dataSourceBuilder.build();
     }
-    
+
     private String adjustUrl() {
         return ConfigUtils.isDockerized() ? url.replace("localhost", "db") : url;
     }

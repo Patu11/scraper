@@ -1,6 +1,6 @@
 package com.github.patu11.backend.notification;
 
-import com.github.patu11.backend.model.common.Episode;
+import com.github.patu11.backend.model.show.Episode;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

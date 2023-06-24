@@ -1,0 +1,9 @@
+<div>
+  <mat-list-item>
+    <mat-spinner *ngIf="showSpinner" diameter="20"></mat-spinner>
+    <a *ngIf="!showSpinner" mat-button (click)="onTitleClick()">{{title}}</a>
+    <button *ngIf="!showSpinner" (click)="onDeleteClick()" style="float: right;" mat-icon-button color="warn">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-list-item>
+</div>

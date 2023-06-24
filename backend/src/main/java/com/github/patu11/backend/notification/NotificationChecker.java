@@ -1,54 +1,37 @@
 package com.github.patu11.backend.notification;
 
 import com.github.patu11.backend.exception.EmptyDateException;
-import com.github.patu11.backend.model.common.Episode;
 import com.github.patu11.backend.model.common.Type;
 import com.github.patu11.backend.model.dto.ScrapingPropertyDto;
-import com.github.patu11.backend.service.AnimeService;
-import com.github.patu11.backend.service.CommonService;
+import com.github.patu11.backend.model.show.Episode;
 import com.github.patu11.backend.service.ScrapingPropertiesService;
-import com.github.patu11.backend.service.SeriesService;
-import com.github.patu11.backend.utils.AnimeUtils;
-import com.github.patu11.backend.utils.SeriesUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.patu11.backend.service.ShowService;
+import com.github.patu11.backend.utils.ShowUtils;
+import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 
 @Service
+@AllArgsConstructor
 public class NotificationChecker {
     private final EmailService emailService;
     private final ScrapingPropertiesService scrapingPropertiesService;
-    private final Map<Type, CommonService> SERVICES;
-
-    @Autowired
-    public NotificationChecker(EmailService emailService, SeriesService seriesService, AnimeService animeService, ScrapingPropertiesService scrapingPropertiesService) {
-        this.emailService = emailService;
-        this.scrapingPropertiesService = scrapingPropertiesService;
-        SERVICES = Map.of(
-                Type.ANIME, animeService,
-                Type.SERIES, seriesService
-        );
-    }
+    private final ShowService showService;
 
     @Scheduled(cron = "0 0 1 * * ?")
     public void task() {
-        scrapingPropertiesService.getAllPropertiesByType(Type.ANIME.getName()).forEach(this::notifyAboutPremiere);
-        scrapingPropertiesService.getAllPropertiesByType(Type.SERIES.getName()).forEach(this::notifyAboutPremiere);
+        scrapingPropertiesService.getAllPropertiesByType(Type.SHOW.getName()).forEach(this::notifyAboutPremiere);
     }
 
     private void notifyAboutPremiere(ScrapingPropertyDto scrapingPropertyDto) {
-        Type type = Type.fromString(scrapingPropertyDto.type());
-
         try {
-            CommonService service = SERVICES.get(type);
-            Episode nextEpisode = service.getNextEpisode(scrapingPropertyDto.name());
+            Episode nextEpisode = showService.getNextEpisode(scrapingPropertyDto.name());
 
-            if (shouldSendEmail(nextEpisode, type)) {
-                String title = service.getTitle(scrapingPropertyDto.name());
+            if (shouldSendEmail(nextEpisode)) {
+                String title = showService.getTitle(scrapingPropertyDto.name());
                 emailService.sendEmail(nextEpisode, title);
                 System.out.println("Email sent.");
             }
@@ -57,20 +40,14 @@ public class NotificationChecker {
         }
     }
 
-    private boolean shouldSendEmail(Episode episode, Type type) {
+    private boolean shouldSendEmail(Episode episode) {
         String premiere = episode.premiere();
         LocalDate now = LocalDate.now();
 
-        return switch (type) {
-            case ANIME -> {
-                try {
-                    yield now.isEqual(AnimeUtils.parseDate(premiere));
-                } catch (EmptyDateException e) {
-                    yield false;
-                }
-            }
-            case SERIES -> SeriesUtils.isValidSeriesDate(premiere) && now.isEqual(LocalDate.parse(premiere));
-            default -> false;
-        };
+        try {
+            return now.isEqual(ShowUtils.parseDate(premiere));
+        } catch (EmptyDateException e) {
+            return false;
+        }
     }
 }

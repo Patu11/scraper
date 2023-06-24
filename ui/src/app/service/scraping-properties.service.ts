@@ -19,4 +19,8 @@ export class ScrapingPropertiesService {
   deletePropertyByName(name: string) {
     return this.http.delete(this.URL + "delete/" + name);
   }
+
+  addProperty(property: ScrapingProperty) {
+    return this.http.post(this.URL + "add", property);
+  }
 }

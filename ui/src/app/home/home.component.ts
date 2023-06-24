@@ -7,7 +7,7 @@ import {CommonService} from "../service/common.service";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  currentType: string = 'series';
+  currentType: string = 'property';
 
   constructor(private commonService: CommonService) {
   }

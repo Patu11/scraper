@@ -1,5 +1,6 @@
 package com.github.patu11.backend.notification;
 
+import com.github.patu11.backend.exception.EmptyDateException;
 import com.github.patu11.backend.model.common.Episode;
 import com.github.patu11.backend.model.common.Type;
 import com.github.patu11.backend.model.dto.ScrapingPropertyDto;
@@ -61,7 +62,13 @@ public class NotificationChecker {
         LocalDate now = LocalDate.now();
 
         return switch (type) {
-            case ANIME -> now.isEqual(AnimeUtils.parseDate(premiere));
+            case ANIME -> {
+                try {
+                    yield now.isEqual(AnimeUtils.parseDate(premiere));
+                } catch (EmptyDateException e) {
+                    yield false;
+                }
+            }
             case SERIES -> SeriesUtils.isValidSeriesDate(premiere) && now.isEqual(LocalDate.parse(premiere));
             default -> false;
         };

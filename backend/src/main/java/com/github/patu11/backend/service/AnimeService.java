@@ -1,5 +1,6 @@
 package com.github.patu11.backend.service;
 
+import com.github.patu11.backend.exception.EmptyDateException;
 import com.github.patu11.backend.model.anime.Anime;
 import com.github.patu11.backend.model.common.Episode;
 import com.github.patu11.backend.scraper.anime.AnimeScrapeService;
@@ -33,7 +34,10 @@ public class AnimeService implements CommonService {
     }
 
     private boolean isPremiereAfterToday(Episode episode) {
-        LocalDate premiereDate = AnimeUtils.parseDate(episode.premiere());
-        return premiereDate.isAfter(LocalDate.now());
+        try {
+            return AnimeUtils.parseDate(episode.premiere()).isAfter(LocalDate.now());
+        } catch (EmptyDateException e) {
+            return false;
+        }
     }
 }

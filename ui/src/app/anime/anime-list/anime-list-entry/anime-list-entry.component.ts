@@ -13,6 +13,8 @@ export class AnimeListEntryComponent {
   @Input()
   rawTitle: string = '';
 
+  showSpinner: boolean = true;
+
   constructor(private commonService: CommonService, private animeService: AnimeService) {
   }
 
@@ -22,7 +24,10 @@ export class AnimeListEntryComponent {
 
   ngOnInit(): void {
     this.animeService.getTitle(this.rawTitle).subscribe({
-      next: (response) => this.title = response,
+      next: (response) => {
+        this.title = response;
+        this.showSpinner = false;
+      },
       error: (error) => console.log(error)
     })
   }

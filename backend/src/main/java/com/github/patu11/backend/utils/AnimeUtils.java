@@ -1,5 +1,8 @@
 package com.github.patu11.backend.utils;
 
+import com.github.patu11.backend.exception.EmptyDateException;
+import org.apache.commons.lang3.StringUtils;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +23,10 @@ public class AnimeUtils {
         put("Dec.", 12);
     }};
 
-    public static LocalDate parseDate(String date) {
+    public static LocalDate parseDate(String date) throws EmptyDateException {
+        if (StringUtils.isBlank(date)) {
+            throw new EmptyDateException("Date is empty.");
+        }
         return LocalDate.of(getYear(date), getMonth(date), getDay(date));
     }
 

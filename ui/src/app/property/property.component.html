@@ -1,0 +1,12 @@
+<div>
+  <mat-form-field class="example-full-width">
+    <mat-label>Add property</mat-label>
+    <input matInput [(ngModel)]="name">
+  </mat-form-field>
+  <mat-button-toggle-group>
+    <mat-button-toggle (click)="onValueChange('comic')">comic</mat-button-toggle>
+    <mat-button-toggle (click)="onValueChange('series')">series</mat-button-toggle>
+    <mat-button-toggle (click)="onValueChange('anime')">anime</mat-button-toggle>
+  </mat-button-toggle-group>
+  <button mat-button color="primary" (click)="onAddButtonClick()" [disabled]="shouldBeDisabled()">Add</button>
+</div>

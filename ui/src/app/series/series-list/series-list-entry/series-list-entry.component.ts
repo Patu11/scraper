@@ -13,6 +13,8 @@ export class SeriesListEntryComponent implements OnInit {
   @Input()
   rawTitle: string = '';
 
+  showSpinner: boolean = true;
+
   constructor(private commonService: CommonService, private seriesService: SeriesService) {
   }
 
@@ -20,9 +22,17 @@ export class SeriesListEntryComponent implements OnInit {
     this.commonService.onSeriesTitleClicked(this.rawTitle);
   }
 
+  onDeleteClick() {
+    console.log(this.rawTitle);
+    this.commonService.onDeleteEntryClick(this.rawTitle);
+  }
+
   ngOnInit(): void {
     this.seriesService.getTitle(this.rawTitle).subscribe({
-      next: (response) => this.title = response,
+      next: (response) => {
+        this.title = response;
+        this.showSpinner = false;
+      },
       error: (error) => console.log(error)
     })
   }

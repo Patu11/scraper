@@ -38,6 +38,10 @@ import {AnimeListComponent} from './anime/anime-list/anime-list.component';
 import {AnimeListEntryComponent} from './anime/anime-list/anime-list-entry/anime-list-entry.component';
 import {AnimeRendererComponent} from './anime/anime-renderer/anime-renderer.component';
 import {AnimeComponent} from './anime/anime-renderer/anime/anime/anime.component';
+import {PropertyComponent} from './property/property.component';
+import {FormsModule} from "@angular/forms";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -58,7 +62,8 @@ import {AnimeComponent} from './anime/anime-renderer/anime/anime/anime.component
     AnimeListComponent,
     AnimeListEntryComponent,
     AnimeRendererComponent,
-    AnimeComponent
+    AnimeComponent,
+    PropertyComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +80,10 @@ import {AnimeComponent} from './anime/anime-renderer/anime/anime/anime.component
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule,
+    MatButtonToggleModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

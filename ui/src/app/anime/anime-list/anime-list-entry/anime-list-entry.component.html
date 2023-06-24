@@ -1,3 +1,4 @@
 <mat-list-item>
-  <a mat-button (click)="onTitleClick()">{{title}}</a>
+  <mat-spinner *ngIf="showSpinner" diameter="20"></mat-spinner>
+  <a *ngIf="!showSpinner" mat-button (click)="onTitleClick()">{{title}}</a>
 </mat-list-item>

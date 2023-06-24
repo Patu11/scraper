@@ -1,0 +1,11 @@
+<div class="container" *ngIf="show">
+  <h1><strong>{{show.title}}</strong></h1>
+  <img width="100%" [src]="show.coverUrl" [alt]="show.title">
+  <div>
+    <h2>Seasons: {{show.seasons?.length}}</h2>
+    <div>
+      <p>Next Episode: <strong>{{nextEpisode?.title}}</strong></p>
+      <p>Premiere Date: <strong>{{nextEpisode?.premiere}}</strong></p>
+    </div>
+  </div>
+</div>

@@ -16,10 +16,10 @@ import {ComicsListComponent} from './comic/comics-list/comics-list.component';
 
 import {ComicsListEntryComponent} from './comic/comics-list/comics-list-entry/comics-list-entry.component';
 import {ComicRendererComponent} from './comic/comic-renderer/comic-renderer.component';
-import {SeriesListComponent} from './series/series-list/series-list.component';
-import {SeriesListEntryComponent} from './series/series-list/series-list-entry/series-list-entry.component';
-import {SeriesRendererComponent} from './series/series-renderer/series-renderer.component';
-import {SeriesComponent} from './series/series-renderer/series/series.component';
+import {ShowListComponent} from './show/show-list/show-list.component';
+import {ShowListEntryComponent} from './show/show-list/show-list-entry/show-list-entry.component';
+import {ShowRendererComponent} from './show/show-renderer/show-renderer.component';
+import {ShowComponent} from './show/show-renderer/show/show.component';
 
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -34,10 +34,6 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
-import {AnimeListComponent} from './anime/anime-list/anime-list.component';
-import {AnimeListEntryComponent} from './anime/anime-list/anime-list-entry/anime-list-entry.component';
-import {AnimeRendererComponent} from './anime/anime-renderer/anime-renderer.component';
-import {AnimeComponent} from './anime/anime-renderer/anime/anime/anime.component';
 import {PropertyComponent} from './property/property.component';
 import {FormsModule} from "@angular/forms";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
@@ -53,16 +49,12 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     ComicsListComponent,
     ComicsListEntryComponent,
     ComicRendererComponent,
-    SeriesListComponent,
-    SeriesListEntryComponent,
-    SeriesRendererComponent,
-    SeriesComponent,
+    ShowListComponent,
+    ShowListEntryComponent,
+    ShowRendererComponent,
+    ShowComponent,
     ToolbarComponent,
     ErrorComponent,
-    AnimeListComponent,
-    AnimeListEntryComponent,
-    AnimeRendererComponent,
-    AnimeComponent,
     PropertyComponent
   ],
   imports: [

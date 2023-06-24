@@ -4,17 +4,13 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button (click)="onMenuChange('series')" mat-menu-item>
+      <button (click)="onMenuChange('show')" mat-menu-item>
         <mat-icon>tv</mat-icon>
-        Series
+        Show
       </button>
       <button (click)="onMenuChange('comics')" mat-menu-item>
         <mat-icon>library_books</mat-icon>
         Comics
-      </button>
-      <button (click)="onMenuChange('anime')" mat-menu-item>
-        <mat-icon>tv</mat-icon>
-        Anime
       </button>
       <button (click)="onMenuChange('property')" mat-menu-item>
         <mat-icon>settings</mat-icon>

@@ -5,13 +5,9 @@
     <app-comics-list></app-comics-list>
     <app-comic-renderer></app-comic-renderer>
   </div>
-  <div *ngIf="currentType==='series'">
-    <app-series-list></app-series-list>
-    <app-series-renderer></app-series-renderer>
-  </div>
-  <div *ngIf="currentType==='anime'">
-    <app-anime-list></app-anime-list>
-    <app-anime-renderer></app-anime-renderer>
+  <div *ngIf="currentType==='show'">
+    <app-show-list></app-show-list>
+    <app-show-renderer></app-show-renderer>
   </div>
   <div *ngIf="currentType==='property'">
     <app-property></app-property>

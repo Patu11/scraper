@@ -1,10 +1,7 @@
 package com.github.patu11.backend.model.common;
 
-import java.util.Arrays;
-
 public enum Type {
-    ANIME("anime"),
-    SERIES("series"),
+    SHOW("show"),
     COMIC("comic");
 
     private final String name;
@@ -15,12 +12,5 @@ public enum Type {
 
     public String getName() {
         return name;
-    }
-
-    public static Type fromString(String name) {
-        return Arrays.stream(Type.values())
-                .filter(value -> value.name.equalsIgnoreCase(name))
-                .findFirst()
-                .orElse(null);
     }
 }

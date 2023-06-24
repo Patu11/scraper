@@ -24,7 +24,8 @@ export class ShowListComponent implements OnInit {
         this.showError = false;
         this.loading = false;
       },
-      error: () => {
+      error: (error) => {
+        console.log(error);
         this.showError = true;
         this.loading = false;
       }

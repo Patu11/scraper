@@ -3,8 +3,6 @@ package com.github.patu11.backend.controller;
 import com.github.patu11.backend.model.dto.ScrapingPropertyDto;
 import com.github.patu11.backend.service.ScrapingPropertiesService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +19,7 @@ public class ScrapingPropertiesController {
     }
 
     @GetMapping("/property/{type}")
-    @Cacheable(value = "property", condition = "#enableCache")
-    public List<ScrapingPropertyDto> getPropertiesByType(@PathVariable String type, @Value("${properties.cache.enable}") boolean enableCache) {
+    public List<ScrapingPropertyDto> getPropertiesByType(@PathVariable String type) {
         return this.scrapingPropertiesService.getAllPropertiesByType(type);
     }
 

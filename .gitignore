@@ -5,7 +5,7 @@ target/
 .idea/
 *.env
 
-db/
+my-db/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

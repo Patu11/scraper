@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
   app:
@@ -7,12 +7,32 @@ services:
       - "8080:8080"
     env_file:
       - .env
+    depends_on:
+      db:
+        condition: service_healthy
 
   ui:
     build: ui
     ports:
       - "4200:80"
 
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: scraperdb
+      MYSQL_USER: $DB_USERNAME
+      MYSQL_PASSWORD: $DB_PASSWORD
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+    volumes:
+      - ./my-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-ppass" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  
   redis:
     image: redis
     ports:

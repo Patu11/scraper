@@ -2,9 +2,7 @@ package com.github.patu11.backend.service;
 
 
 import com.github.patu11.backend.model.common.Episode;
-import com.github.patu11.backend.model.common.Type;
-import com.github.patu11.backend.model.common.UrlTitle;
-import com.github.patu11.backend.model.series.Season;
+import com.github.patu11.backend.model.common.Season;
 import com.github.patu11.backend.model.series.SeriesResponse;
 import com.github.patu11.backend.scraper.series.SeriesScrapeService;
 import lombok.AllArgsConstructor;
@@ -17,19 +15,18 @@ import java.util.NoSuchElementException;
 @Service
 @AllArgsConstructor
 public class SeriesService implements CommonService {
-    private final List<String> seriesUrls;
     private final SeriesScrapeService seriesScrapeService;
 
     public SeriesResponse getSeries(String seriesUrl) {
         return new SeriesResponse(seriesScrapeService.getSeries(seriesUrl));
     }
 
-    public List<UrlTitle> getAllSeriesTitles() {
-        return this.seriesUrls.stream()
-                .map(entry -> new UrlTitle(entry, seriesScrapeService.getTitle(entry), Type.SERIES))
-                .toList();
+    @Override
+    public String getTitle(String seriesUrl) {
+        return seriesScrapeService.getTitle(seriesUrl);
     }
 
+    @Override
     public Episode getNextEpisode(String seriesUrl) {
         return seriesScrapeService.getSeasons(seriesUrl).stream()
                 .map(Season::episodes)

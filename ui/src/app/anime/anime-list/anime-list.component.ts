@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {AnimeService} from "../../service/anime.service";
-import {UrlTitle} from "../../model/UrlTitle";
+import {ScrapingProperty} from "../../model/ScrapingProperty";
+import {ScrapingPropertiesService} from "../../service/scraping-properties.service";
 
 @Component({
   selector: 'app-anime-list',
@@ -8,16 +8,16 @@ import {UrlTitle} from "../../model/UrlTitle";
   styleUrls: ['./anime-list.component.css']
 })
 export class AnimeListComponent {
-  urlTitles: UrlTitle[] = [];
+  urlTitles: ScrapingProperty[] = [];
   showError: boolean = false;
   loading: boolean = false;
 
-  constructor(private animeService: AnimeService) {
+  constructor(private scrapingPropertiesService: ScrapingPropertiesService) {
   }
 
   ngOnInit(): void {
     this.loading = true;
-    this.animeService.getAllTitles().subscribe({
+    this.scrapingPropertiesService.getPropertiesByType("anime").subscribe({
       next: (response) => {
         this.urlTitles = response;
         this.showError = false;

@@ -1,9 +1,9 @@
 package com.github.patu11.backend.scraper.series;
 
 
-import com.github.patu11.backend.scraper.ConnectionService;
-import com.github.patu11.backend.model.series.Season;
+import com.github.patu11.backend.model.common.Season;
 import com.github.patu11.backend.model.series.Series;
+import com.github.patu11.backend.scraper.ConnectionService;
 
 import java.util.List;
 

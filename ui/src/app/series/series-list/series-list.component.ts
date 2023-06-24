@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {SeriesService} from "../../service/series.service";
-import {UrlTitle} from "../../model/UrlTitle";
+import {ScrapingPropertiesService} from "../../service/scraping-properties.service";
+import {ScrapingProperty} from "../../model/ScrapingProperty";
+import {CommonService} from "../../service/common.service";
 
 @Component({
   selector: 'app-series-list',
@@ -8,16 +9,16 @@ import {UrlTitle} from "../../model/UrlTitle";
   styleUrls: ['./series-list.component.css']
 })
 export class SeriesListComponent implements OnInit {
-  urlTitles: UrlTitle[] = [];
+  urlTitles: ScrapingProperty[] = [];
   showError: boolean = false;
   loading: boolean = false;
 
-  constructor(private seriesService: SeriesService) {
+  constructor(private scrapingPropertiesService: ScrapingPropertiesService, private commonService: CommonService) {
   }
 
   ngOnInit(): void {
     this.loading = true;
-    this.seriesService.getAllTitles().subscribe({
+    this.scrapingPropertiesService.getPropertiesByType("series").subscribe({
       next: (response) => {
         this.urlTitles = response;
         this.showError = false;
@@ -27,6 +28,14 @@ export class SeriesListComponent implements OnInit {
         this.showError = true;
         this.loading = false;
       }
-    })
+    });
+
+    this.commonService.clickedDeleteEntry.subscribe((data) => {
+      this.scrapingPropertiesService.deletePropertyByName(data).subscribe({
+        next: (response) => console.log(response),
+        error: (error) => console.log(error)
+      });
+      this.urlTitles = this.urlTitles.filter(entry => entry.name !== data);
+    });
   }
 }

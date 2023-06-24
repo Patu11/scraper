@@ -16,6 +16,9 @@ export class CommonService {
   @Output()
   clickedMenuEntry: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output()
+  clickedDeleteEntry: EventEmitter<string> = new EventEmitter<string>();
+
   constructor() {
   }
 
@@ -33,5 +36,9 @@ export class CommonService {
 
   onMenuClick(entry: string) {
     this.clickedMenuEntry.emit(entry);
+  }
+
+  onDeleteEntryClick(entry: string) {
+    this.clickedDeleteEntry.emit(entry);
   }
 }

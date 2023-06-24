@@ -5,6 +5,7 @@ import com.github.patu11.backend.model.comics.Comic;
 import com.github.patu11.backend.model.comics.ComicResponse;
 import com.github.patu11.backend.model.common.Type;
 import com.github.patu11.backend.model.common.UrlTitle;
+import com.github.patu11.backend.model.dto.ScrapingPropertyDto;
 import com.github.patu11.backend.scraper.comic.ComicsScrapeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ComicsService {
     private final List<String> comicNames;
     private final ComicsScrapeService comicsScrapeService;
+    private final ScrapingPropertiesService scrapingPropertiesService;
 
     public ComicResponse handleRequest(String comicUrl) {
         Comic comic = comicsScrapeService.getComic(comicUrl);
@@ -23,8 +25,15 @@ public class ComicsService {
     }
 
     public List<UrlTitle> getAllComicsTitles() {
-        return this.comicNames.stream()
+        return this.scrapingPropertiesService.getAllPropertiesByType(Type.COMIC.name()).stream()
+                .map(ScrapingPropertyDto::name)
                 .map(entry -> new UrlTitle(entry, comicsScrapeService.getTitle(entry), Type.COMIC))
                 .toList();
     }
+
+//    public List<UrlTitle> getAllComicsTitles() {
+//        return this.comicNames.stream()
+//                .map(entry -> new UrlTitle(entry, comicsScrapeService.getTitle(entry), Type.COMIC))
+//                .toList();
+//    }
 }

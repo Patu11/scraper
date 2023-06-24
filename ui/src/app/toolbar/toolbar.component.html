@@ -4,9 +4,22 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button (click)="onMenuChange('series')" mat-menu-item>Series</button>
-      <button (click)="onMenuChange('comics')" mat-menu-item>Comics</button>
-      <button (click)="onMenuChange('anime')" mat-menu-item>Anime</button>
+      <button (click)="onMenuChange('series')" mat-menu-item>
+        <mat-icon>tv</mat-icon>
+        Series
+      </button>
+      <button (click)="onMenuChange('comics')" mat-menu-item>
+        <mat-icon>library_books</mat-icon>
+        Comics
+      </button>
+      <button (click)="onMenuChange('anime')" mat-menu-item>
+        <mat-icon>tv</mat-icon>
+        Anime
+      </button>
+      <button (click)="onMenuChange('property')" mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        Props
+      </button>
     </mat-menu>
     <span>Scraper service</span>
   </mat-toolbar>

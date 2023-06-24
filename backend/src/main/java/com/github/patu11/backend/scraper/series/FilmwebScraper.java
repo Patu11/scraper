@@ -2,7 +2,7 @@ package com.github.patu11.backend.scraper.series;
 
 
 import com.github.patu11.backend.model.common.Episode;
-import com.github.patu11.backend.model.series.Season;
+import com.github.patu11.backend.model.common.Season;
 import com.github.patu11.backend.model.series.Series;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -27,7 +27,7 @@ public class FilmwebScraper implements SeriesScrapeService {
     public Series getSeries(String seriesUrl) {
         return new Series(getTitle(seriesUrl), getCover(seriesUrl), getSeasons(seriesUrl));
     }
-    
+
     @Override
     public List<Season> getSeasons(String seriesUrl) {
         Elements seasonsElement = connect(BASE_URL_SERIES + seriesUrl).getElementsByClass("squareNavigation__item");

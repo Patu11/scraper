@@ -23,4 +23,8 @@ export class ScrapingPropertiesService {
   addProperty(property: ScrapingProperty) {
     return this.http.post(this.URL + "add", property);
   }
+
+  updateProperty(property: ScrapingProperty) {
+    return this.http.put(this.URL + "update", property);
+  }
 }

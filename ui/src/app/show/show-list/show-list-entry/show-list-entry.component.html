@@ -2,12 +2,16 @@
   <mat-list-item>
     <mat-spinner *ngIf="showSpinner" diameter="20"></mat-spinner>
     <a *ngIf="!showSpinner" mat-button (click)="onTitleClick()">{{title}}</a>
-    <button *ngIf="!showSpinner" (click)="onDeleteClick()" style="float: right;" mat-icon-button color="warn">
+    <button class="right" *ngIf="!showSpinner" (click)="onDeleteClick()" mat-icon-button
+            color="warn">
       <mat-icon>delete</mat-icon>
     </button>
-    <button *ngIf="!showSpinner" (click)="onNotificationClick()" style="float: right;" mat-icon-button
+    <button class="right" *ngIf="!showSpinner" (click)="onNotificationClick()" mat-icon-button
             color="{{property.notification?'warn':'basic'}}">
       <mat-icon>{{property.notification ? 'notifications_off' : 'notifications'}}</mat-icon>
     </button>
+    <a class="right" *ngIf="!showSpinner" mat-icon-button href="{{imdbUrl}}" target="_blank" color="accent">
+      <mat-icon>open_in_new</mat-icon>
+    </a>
   </mat-list-item>
 </div>

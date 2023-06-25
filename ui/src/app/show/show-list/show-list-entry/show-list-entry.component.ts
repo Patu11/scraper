@@ -9,6 +9,8 @@ import {ScrapingProperty} from "../../../model/ScrapingProperty";
   styleUrls: ['./show-list-entry.component.css']
 })
 export class ShowListEntryComponent implements OnInit {
+  imdbUrl: string = 'https://www.imdb.com/title/';
+
   title: string = '';
 
   @Input()
@@ -33,6 +35,7 @@ export class ShowListEntryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.imdbUrl = this.imdbUrl + this.property.name;
     this.showService.getTitle(this.property.name).subscribe({
       next: (response) => {
         this.title = response;

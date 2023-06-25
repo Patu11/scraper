@@ -27,4 +27,9 @@ public class ScrapingPropertiesController {
     public void deleteByName(@PathVariable String name) {
         this.scrapingPropertiesService.deleteByName(name);
     }
+
+    @PutMapping("/property/update")
+    public void update(@RequestBody ScrapingPropertyDto body) {
+        this.scrapingPropertiesService.updateProperty(body);
+    }
 }

@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ComicsService {
-    private final List<String> comicNames;
     private final ComicsScrapeService comicsScrapeService;
     private final ScrapingPropertiesService scrapingPropertiesService;
 
@@ -30,10 +29,4 @@ public class ComicsService {
                 .map(entry -> new UrlTitle(entry, comicsScrapeService.getTitle(entry), Type.COMIC))
                 .toList();
     }
-
-//    public List<UrlTitle> getAllComicsTitles() {
-//        return this.comicNames.stream()
-//                .map(entry -> new UrlTitle(entry, comicsScrapeService.getTitle(entry), Type.COMIC))
-//                .toList();
-//    }
 }

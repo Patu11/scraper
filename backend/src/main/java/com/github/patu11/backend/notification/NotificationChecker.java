@@ -23,7 +23,9 @@ public class NotificationChecker {
 
     @Scheduled(cron = "0 0 1 * * ?")
     public void task() {
-        scrapingPropertiesService.getAllPropertiesByType(Type.SHOW.getName()).forEach(this::notifyAboutPremiere);
+        scrapingPropertiesService.getAllPropertiesByType(Type.SHOW.getName()).stream()
+                .filter(ScrapingPropertyDto::notification)
+                .forEach(this::notifyAboutPremiere);
     }
 
     private void notifyAboutPremiere(ScrapingPropertyDto scrapingPropertyDto) {

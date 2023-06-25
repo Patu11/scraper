@@ -17,7 +17,8 @@ export class PropertyComponent {
   onAddButtonClick() {
     const property: ScrapingProperty = {
       name: this.name,
-      type: this.type
+      type: this.type,
+      notification: true
     };
 
     this.scrapingPropertiesService.addProperty(property).subscribe({

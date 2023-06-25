@@ -1,14 +1,12 @@
 package com.github.patu11.backend.model.common;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "scraping_properties")
@@ -23,4 +21,7 @@ public class ScrapingProperty {
 
     @Column
     private String type;
+
+    @Column
+    private boolean notification;
 }

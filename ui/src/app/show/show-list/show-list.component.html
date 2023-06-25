@@ -5,7 +5,7 @@
     <app-error [show]="showError" message="Error when requesting data."></app-error>
     <div *ngFor="let entry of urlTitles">
       <mat-list-item>
-        <app-show-list-entry [rawTitle]="entry.name"></app-show-list-entry>
+        <app-show-list-entry [property]="entry"></app-show-list-entry>
       </mat-list-item>
       <mat-divider></mat-divider>
     </div>

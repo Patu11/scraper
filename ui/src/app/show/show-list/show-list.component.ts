@@ -38,5 +38,12 @@ export class ShowListComponent implements OnInit {
       });
       this.urlTitles = this.urlTitles.filter(entry => entry.name !== data);
     });
+
+    this.commonService.clickedNotificationEntry.subscribe((data) => {
+      this.scrapingPropertiesService.updateProperty(data).subscribe({
+        next: (response) => console.log(response),
+        error: (error) => console.log(error)
+      });
+    });
   }
 }

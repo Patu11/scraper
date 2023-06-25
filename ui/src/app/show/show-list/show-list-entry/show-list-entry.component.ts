@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommonService} from "../../../service/common.service";
 import {ShowService} from "../../../service/show.service";
+import {ScrapingProperty} from "../../../model/ScrapingProperty";
 
 @Component({
   selector: 'app-show-list-entry',
@@ -11,7 +12,7 @@ export class ShowListEntryComponent implements OnInit {
   title: string = '';
 
   @Input()
-  rawTitle: string = '';
+  property!: ScrapingProperty;
 
   showSpinner: boolean = true;
 
@@ -19,16 +20,20 @@ export class ShowListEntryComponent implements OnInit {
   }
 
   onTitleClick() {
-    this.commonService.onSeriesTitleClicked(this.rawTitle);
+    this.commonService.onSeriesTitleClicked(this.property.name);
+  }
+
+  onNotificationClick() {
+    this.property.notification = !this.property.notification;
+    this.commonService.onNotificationClick(this.property);
   }
 
   onDeleteClick() {
-    console.log(this.rawTitle);
-    this.commonService.onDeleteEntryClick(this.rawTitle);
+    this.commonService.onDeleteEntryClick(this.property.name);
   }
 
   ngOnInit(): void {
-    this.showService.getTitle(this.rawTitle).subscribe({
+    this.showService.getTitle(this.property.name).subscribe({
       next: (response) => {
         this.title = response;
         this.showSpinner = false;

@@ -34,7 +34,7 @@ public class NotificationChecker {
 
             if (shouldSendEmail(nextEpisode)) {
                 String title = showService.getTitle(scrapingPropertyDto.name());
-                emailService.sendEmail(nextEpisode, title);
+                emailService.sendEmail(nextEpisode, title, scrapingPropertyDto.name());
                 System.out.println("Email sent.");
             }
         } catch (Exception exception) {

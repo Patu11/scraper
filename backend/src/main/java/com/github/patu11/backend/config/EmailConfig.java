@@ -1,12 +1,19 @@
 package com.github.patu11.backend.config;
 
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Properties;
 
 @Configuration
@@ -37,7 +44,7 @@ public class EmailConfig {
     @Value("${spring.mail.debug}")
     private String debug;
 
-    @Bean
+    @Bean()
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(host);
@@ -54,10 +61,21 @@ public class EmailConfig {
     }
 
     @Bean
-    public SimpleMailMessage getMailMessage() {
-        SimpleMailMessage message = new SimpleMailMessage();
+    public MimeMessage getMimeMessage() throws MessagingException {
+        MimeMessage message = getJavaMailSender().createMimeMessage();
         message.setFrom(username);
-        message.setTo(recipient);
+        message.setRecipients(Message.RecipientType.TO, recipient);
         return message;
+    }
+
+    @Bean("mailTemplate")
+    public String getMailTemplate() {
+        Resource resource = new ClassPathResource("templates/mail.html");
+        try {
+            File file = resource.getFile();
+            return new String(Files.readAllBytes(file.toPath()));
+        } catch (IOException e) {
+            return "New episode: %s\nPremiere date: %s";
+        }
     }
 }

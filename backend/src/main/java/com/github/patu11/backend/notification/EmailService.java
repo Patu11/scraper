@@ -1,8 +1,9 @@
 package com.github.patu11.backend.notification;
 
 import com.github.patu11.backend.model.show.Episode;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +11,17 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class EmailService {
     private final JavaMailSender mailSender;
-    private final SimpleMailMessage message;
+    private final MimeMessage mimeMessage;
+    private final String mailTemplate;
 
-    public void sendEmail(Episode episode, String title) {
-        message.setSubject(createSubject(title));
-        message.setText(createBody(episode));
-        mailSender.send(message);
+    public void sendEmail(Episode episode, String title, String showId) {
+        try {
+            mimeMessage.setSubject(createSubject(title));
+            mimeMessage.setContent(createBody(episode, showId), "text/html");
+        } catch (MessagingException e) {
+            System.out.println("Error when sending email: " + e.getMessage());
+        }
+        mailSender.send(mimeMessage);
         System.out.println("Email sent");
     }
 
@@ -23,8 +29,7 @@ public class EmailService {
         return String.format("%s new episode today", title);
     }
 
-    private String createBody(Episode episode) {
-        return "New episode: " + episode.title() + "\n" +
-                "Premiere date: " + episode.premiere();
+    private String createBody(Episode episode, String showId) {
+        return String.format(mailTemplate, episode.title(), episode.premiere(), showId);
     }
 }

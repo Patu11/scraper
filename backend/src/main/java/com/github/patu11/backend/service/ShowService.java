@@ -31,14 +31,14 @@ public class ShowService {
         return showScrapeService.getSeasons(showId).stream()
                 .map(Season::episodes)
                 .flatMap(List::stream)
-                .filter(this::isPremiereAfterToday)
+                .filter(this::isPremiereTodayOrAfter)
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException("[Show] Next episode not found for: " + showId));
     }
 
-    private boolean isPremiereAfterToday(Episode episode) {
+    private boolean isPremiereTodayOrAfter(Episode episode) {
         try {
-            return ShowUtils.parseDate(episode.premiere()).isAfter(LocalDate.now());
+            return ShowUtils.parseDate(episode.premiere()).isAfter(LocalDate.now().minusDays(1));
         } catch (EmptyDateException e) {
             return false;
         }

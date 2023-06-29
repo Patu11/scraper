@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 public class EmailService {
     private final JavaMailSender mailSender;
     private final MimeMessage mimeMessage;
-    private final String mailTemplate;
 
     public void sendEmail(Episode episode, String title, String showId) {
         try {
@@ -22,7 +21,7 @@ public class EmailService {
             System.out.println("Error when sending email: " + e.getMessage());
         }
         mailSender.send(mimeMessage);
-        System.out.println("Email sent");
+        System.out.println("Email sent.");
     }
 
     private String createSubject(String title) {
@@ -30,6 +29,15 @@ public class EmailService {
     }
 
     private String createBody(Episode episode, String showId) {
+        String mailTemplate = """
+                <html lang="en">
+                    <body>
+                        <h2>New episode title: <strong>%s</strong></h2>
+                        <h2>Premiere date: <strong>%s</strong></h2>
+                        <h2>Link: <strong><a href="https://www.imdb.com/title/%s">imdb</a></strong></h2>
+                    </body>
+                </html>
+                """;
         return String.format(mailTemplate, episode.title(), episode.premiere(), showId);
     }
 }

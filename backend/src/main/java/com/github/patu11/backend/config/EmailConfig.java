@@ -6,14 +6,9 @@ import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Properties;
 
 @Configuration
@@ -66,16 +61,5 @@ public class EmailConfig {
         message.setFrom(username);
         message.setRecipients(Message.RecipientType.TO, recipient);
         return message;
-    }
-
-    @Bean("mailTemplate")
-    public String getMailTemplate() {
-        Resource resource = new ClassPathResource("templates/mail.html");
-        try {
-            File file = resource.getFile();
-            return new String(Files.readAllBytes(file.toPath()));
-        } catch (IOException e) {
-            return "New episode: %s\nPremiere date: %s";
-        }
     }
 }
